@@ -19,6 +19,10 @@ public class PlayerControlls : MonoBehaviour
     // movify the physics of the rigidbody itself
     Rigidbody player_rigidBody;
 
+    // for lap detection
+    public int lapNum;
+    public int checkpointNum;
+
     void Start(){
 
         player_rigidBody = GetComponent<Rigidbody>();
@@ -27,6 +31,9 @@ public class PlayerControlls : MonoBehaviour
         gravity_multiplier = 4.5f;
 
         Debug.Log("ground height " + ground_height);
+
+        lapNum = 1;
+        checkpointNum = 0;
     }
 
     // Update is called once per frame
@@ -86,7 +93,7 @@ public class PlayerControlls : MonoBehaviour
             player_rigidBody.velocity += Vector3.up * Physics2D.gravity.y * (gravity_multiplier - 1) * Time.deltaTime;
         }
 
-        Debug.Log(player_rigidBody.velocity);
+        //Debug.Log(player_rigidBody.velocity);
 
 
     }
