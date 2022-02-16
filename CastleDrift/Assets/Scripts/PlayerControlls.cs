@@ -22,6 +22,8 @@ public class PlayerControlls : MonoBehaviour
     // for lap detection
     public int lapNum;
     public int checkpointNum;
+    Vector3 m_LeftRotate;
+    Vector3 m_RightRotate;
 
     void Start(){
 
@@ -29,6 +31,9 @@ public class PlayerControlls : MonoBehaviour
         ground_height = player_rigidBody.position.y;
         jump_count = 0;
         gravity_multiplier = 4.5f;
+
+        m_LeftRotate = new Vector3(0, rot_speed, 0);
+        m_RightRotate = new Vector3(0, -rot_speed, 0);
 
         Debug.Log("ground height " + ground_height);
 
@@ -42,18 +47,20 @@ public class PlayerControlls : MonoBehaviour
         
         // move forward [simple]
         if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)){
-            player_rigidBody.velocity = transform.forward * forward_speed;
-            
-            //this should apply force forward, but not sure why this isn't working
-            //player_rigidBody.AddForce(transform.forward * forward_speed);
 
             // turning the car
-            if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)){
+            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)){
                 transform.Rotate( new Vector3(0.0f, -1.0f, 0.0f) * Time.deltaTime * rot_speed, Space.World);
             }
-            else if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)){
+            else if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)){                
                 transform.Rotate( new Vector3(0.0f, 1.0f, 0.0f) * Time.deltaTime * rot_speed, Space.World);
+
+                //alternate rotation method
+                //player_rigidBody.MovePosition(transform.position + (transform.right * rot_speed));
             }
+
+            //go forward
+            player_rigidBody.MovePosition(transform.position + (transform.forward * forward_speed * Time.deltaTime));
         }
 
         // move backwards [simple]
@@ -97,4 +104,14 @@ public class PlayerControlls : MonoBehaviour
 
 
     }
+
+    //alternate method 1: me no likey
+    /*
+    void FixedUpdate()
+    {
+        float mV = Input.GetAxis("Horizontal");
+        float mH = Input.GetAxis("Vertical");
+        player_rigidBody.velocity = new Vector3(mH * rot_speed, player_rigidBody.velocity.y, mV * -forward_speed);
+    }
+    */
 }
