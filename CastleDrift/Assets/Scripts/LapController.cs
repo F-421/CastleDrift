@@ -14,7 +14,7 @@ public class LapController : MonoBehaviour
     [SerializeField] TextMeshProUGUI lapText;
 
     void Start(){
-        lapText.text = "0/" + totalLaps;
+        lapText.text = "1/" + totalLaps;
     }
 
     // do we increase lap? endgame?
