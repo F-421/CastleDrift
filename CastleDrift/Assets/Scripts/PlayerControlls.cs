@@ -6,7 +6,7 @@ public class PlayerControlls : MonoBehaviour
 {
 
     //for now, we just are working with a set speed, no acceleration
-    public float forward_speed;  // how fast are we moving?
+    public float default_forward_speed;  // how fast are we moving?
     public float rot_speed; //how fast are we turning?
 
     public float jump_velocity; //how much force do we apply when we jump
@@ -15,6 +15,13 @@ public class PlayerControlls : MonoBehaviour
     private float ground_height; //when to detect we are on the ground
     private int jump_count; // how many times we have jumped (allows for double+ jump)
     private float gravity_multiplier; //makes it fall faster
+
+    private float forward_speed; //current forward speed
+
+    //for boosting
+    private float boost_time_left; // how much time left in boost
+    private bool boost_in_effect; 
+
 
     // movify the physics of the rigidbody itself
     Rigidbody player_rigidBody;
@@ -31,6 +38,7 @@ public class PlayerControlls : MonoBehaviour
         ground_height = player_rigidBody.position.y;
         jump_count = 0;
         gravity_multiplier = 4.5f;
+        forward_speed = default_forward_speed;
 
         m_LeftRotate = new Vector3(0, rot_speed, 0);
         m_RightRotate = new Vector3(0, -rot_speed, 0);
@@ -39,6 +47,7 @@ public class PlayerControlls : MonoBehaviour
 
         lapNum = 1;
         checkpointNum = 0;
+        boost_in_effect = false;
     }
 
     // Update is called once per frame
@@ -102,6 +111,20 @@ public class PlayerControlls : MonoBehaviour
 
         //Debug.Log(player_rigidBody.velocity);
 
+        // if boost is over, change the velocity back
+        if(boost_in_effect){
+            boost_time_left -= Time.deltaTime;
+
+            if(boost_time_left <= 0){
+
+                Debug.Log("Booster Ended");
+
+                forward_speed = default_forward_speed;
+                boost_in_effect = false;
+                boost_time_left = 0;
+            }
+        }
+
 
     }
 
@@ -114,4 +137,16 @@ public class PlayerControlls : MonoBehaviour
         player_rigidBody.velocity = new Vector3(mH * rot_speed, player_rigidBody.velocity.y, mV * -forward_speed);
     }
     */
+
+    // function to handle what happens in boost
+    public void TurnBoostOn(float boost_timer, float speed_boost){
+        
+        //don't stack speed if boost already exists
+        if(!boost_in_effect){
+            boost_in_effect = true;
+            forward_speed += speed_boost;
+        }
+
+        boost_time_left = boost_timer;
+    }
 }
