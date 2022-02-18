@@ -23,10 +23,18 @@ public class PlayerControlls : MonoBehaviour
     private int jump_count; // how many times we have jumped (allows for double+ jump)
     private float gravity_multiplier; //makes it fall faster
 
-    //for boosting
+    // for boosting
     private float boost_time_left; // how much time left in boost
     private bool boost_in_effect; 
 
+    // for drifting
+    public float max_velocity_drift_loss; //how much we slow down (and speed back up bc I'm lazy)
+    public float drift_time; //how long we drift at max drift (and other drifts are in relation)
+    private float drift_time_left; //drift time remaining
+    private float drift_velocity_stored; //how much velocity are we storing?
+    
+    enum DriftCode {NO_DRIFT, STORE_DRIFT, RELEASE_DRIFT};
+    private DriftCode isDrifting; //what stage are we 'drifting'
 
     // movify the physics of the rigidbody itself
     Rigidbody player_rigidBody;
@@ -53,6 +61,9 @@ public class PlayerControlls : MonoBehaviour
         lapNum = 1;
         checkpointNum = 0;
         boost_in_effect = false;
+
+        isDrifting = DriftCode.NO_DRIFT;
+        drift_velocity_stored = 0;
     }
 
     // Update is called once per frame
@@ -69,6 +80,15 @@ public class PlayerControlls : MonoBehaviour
             else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
             {
                 transform.Rotate(new Vector3(0.0f, 1.0f, 0.0f) * Time.deltaTime * rot_speed, Space.World);
+            }
+
+            //ony drift when going forward
+            if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift) && isDrifting == DriftCode.NO_DRIFT){
+                isDrifting = DriftCode.STORE_DRIFT;
+            }
+            else if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift)){
+                Debug.Log("Let go of drift");
+                ReleaseDrift();
             }
         }
 
@@ -93,33 +113,27 @@ public class PlayerControlls : MonoBehaviour
         else
         {
             cur_accel = 0;
-
-            float friction_amount = max_forward_speed * friction_percent;
-
-            //decelerate forwards or stop
-            if (forward_speed < 0) {
-
-
-                if (friction_amount > forward_speed * -1) {
-                    forward_speed = 0;
-                }
-                else
-                {
-                    forward_speed += friction_amount;
-                }
-            }
-
-            //decelerate backwards or stop
-            else if (forward_speed > 0) {
-                if (friction_amount > forward_speed) {
-                    forward_speed = 0;
-                }
-                else{
-                    forward_speed -= friction_amount;
-                }
-            }
-
+            FakeFriction();
         }
+
+        //store our velocity and accel
+        if(isDrifting == DriftCode.STORE_DRIFT){
+            if(!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.UpArrow)){
+                ReleaseDrift();
+            }
+            //apply drift
+            else{
+                cur_accel = 0;
+                if(forward_speed > max_forward_speed - max_velocity_drift_loss){
+                    FakeFriction();
+                }
+                if(drift_velocity_stored < max_forward_speed){
+                    drift_velocity_stored += max_forward_speed * friction_percent;
+                }
+            }
+        }
+        //auto drift if release forward and drifting
+        
 
         //only increase accel if not at maximum
         if( (cur_accel > 0 && forward_speed < max_forward_speed) || 
@@ -163,6 +177,22 @@ public class PlayerControlls : MonoBehaviour
             }
         }
 
+        // still apply drift until time is up
+        if(isDrifting == DriftCode.RELEASE_DRIFT){
+            drift_time_left -= Time.deltaTime;
+
+            if(drift_time_left <= 0){
+                Debug.Log("Drift Ended");
+
+                forward_speed = max_forward_speed;
+                cur_max_speed = max_forward_speed;
+                cur_accel = acceleration_max;
+                drift_time_left = 0;
+                isDrifting = DriftCode.NO_DRIFT;
+                drift_velocity_stored = 0;
+            }
+        }
+
 
     }
 
@@ -185,8 +215,8 @@ public class PlayerControlls : MonoBehaviour
 
     }
 
-        // function to handle what happens in boost
-        public void TurnBoostOn(float boost_timer, float speed_boost){
+    // function to handle what happens in boost
+    public void TurnBoostOn(float boost_timer, float speed_boost){
         
         //don't stack speed if boost already exists
         if(!boost_in_effect){
@@ -196,5 +226,47 @@ public class PlayerControlls : MonoBehaviour
         }
 
         boost_time_left = boost_timer;
+    }
+
+    //we drift
+    public void ReleaseDrift(){
+        Debug.Log("Release Drift here");
+        isDrifting = DriftCode.RELEASE_DRIFT;
+
+        //calculate new start velocity and max and speed to it
+        forward_speed += drift_velocity_stored;
+        cur_accel = acceleration_max * 2;
+
+        //drift time based on how much we stored (max is drift_time)
+        drift_time_left = (drift_velocity_stored / max_velocity_drift_loss) * drift_time;
+    }
+
+    // do internal 'friction' calculation
+    // yes, I am faking friction in decelerating conditions at the moment
+    private void FakeFriction(){
+        float friction_amount = max_forward_speed * friction_percent;
+
+        //decelerate forwards or stop
+        if (forward_speed < 0) {
+
+
+            if (friction_amount > forward_speed * -1) {
+                forward_speed = 0;
+            }
+            else
+            {
+                forward_speed += friction_amount;
+            }
+        }
+
+        //decelerate backwards or stop
+        else if (forward_speed > 0) {
+            if (friction_amount > forward_speed) {
+                forward_speed = 0;
+            }
+            else{
+                forward_speed -= friction_amount;
+            }
+        }
     }
 }
