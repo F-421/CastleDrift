@@ -6,17 +6,22 @@ public class PlayerControlls : MonoBehaviour
 {
 
     //for now, we just are working with a set speed, no acceleration
-    public float default_forward_speed;  // how fast are we moving?
+    public float max_forward_speed;  // how fast can we move?
     public float rot_speed; //how fast are we turning?
+    public float acceleration_max; //how fast can we accelerate?
+    public float start_push_speed; //how fast we start in beginning
+    public float friction_percent; //how fast we slow down (not a force. I know, confusing)
+
+    //privately, we need to move
+    private float cur_accel; //what accek do we have (based on key movement)
+    private float cur_max_speed; //cur max for boosts
+    private float forward_speed; //current forward speed
 
     public float jump_velocity; //how much force do we apply when we jump
     public int max_jump; //how many times can we jump
 
-    private float ground_height; //when to detect we are on the ground
     private int jump_count; // how many times we have jumped (allows for double+ jump)
     private float gravity_multiplier; //makes it fall faster
-
-    private float forward_speed; //current forward speed
 
     //for boosting
     private float boost_time_left; // how much time left in boost
@@ -35,15 +40,15 @@ public class PlayerControlls : MonoBehaviour
     void Start(){
 
         player_rigidBody = GetComponent<Rigidbody>();
-        ground_height = player_rigidBody.position.y;
         jump_count = 0;
         gravity_multiplier = 4.5f;
-        forward_speed = default_forward_speed;
+
+        cur_accel = 0;
+        forward_speed = start_push_speed;
+        cur_max_speed = max_forward_speed;
 
         m_LeftRotate = new Vector3(0, rot_speed, 0);
         m_RightRotate = new Vector3(0, -rot_speed, 0);
-
-        Debug.Log("ground height " + ground_height);
 
         lapNum = 1;
         checkpointNum = 0;
@@ -53,42 +58,74 @@ public class PlayerControlls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        // move forward [simple]
-        if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)){
-
-            // turning the car
-            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)){
-                transform.Rotate( new Vector3(0.0f, -1.0f, 0.0f) * Time.deltaTime * rot_speed, Space.World);
+        //move forwards
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+        {
+            cur_accel = acceleration_max;
+            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+            {
+                transform.Rotate(new Vector3(0.0f, -1.0f, 0.0f) * Time.deltaTime * rot_speed, Space.World);
             }
-            else if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)){                
-                transform.Rotate( new Vector3(0.0f, 1.0f, 0.0f) * Time.deltaTime * rot_speed, Space.World);
-
-                //alternate rotation method
-                //player_rigidBody.MovePosition(transform.position + (transform.right * rot_speed));
-            }
-
-            //go forward
-            player_rigidBody.MovePosition(transform.position + (transform.forward * forward_speed * Time.deltaTime));
-        }
-
-        // move backwards [simple]
-        if(Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)){
-            player_rigidBody.velocity = transform.forward * -forward_speed;
-
-            // turning the car
-            if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)){
-                transform.Rotate( new Vector3(0.0f, -1.0f, 0.0f) * Time.deltaTime * rot_speed, Space.World);
-            }
-            else if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)){
-                transform.Rotate( new Vector3(0.0f, 1.0f, 0.0f) * Time.deltaTime * rot_speed, Space.World);
+            else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+            {
+                transform.Rotate(new Vector3(0.0f, 1.0f, 0.0f) * Time.deltaTime * rot_speed, Space.World);
             }
         }
 
-        // reset jump count if we hit ground
-        // NOTE: This detects ground for a flat plane, we need to update to make it grounded to the current surface!!!
-        if(jump_count > 0 && ground_height >= player_rigidBody.position.y){
-            jump_count = 0;
+        //move backwards
+        else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+        {
+            cur_accel = -acceleration_max;
+
+            // turning the car
+            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+            {
+                transform.Rotate(new Vector3(0.0f, -1.0f, 0.0f) * Time.deltaTime * rot_speed, Space.World);
+            }
+            else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+            {
+                transform.Rotate(new Vector3(0.0f, 1.0f, 0.0f) * Time.deltaTime * rot_speed, Space.World);
+            }
+        }
+
+        //stop accelerating if no key pushed (decelerate)
+        // apply 'friction' here (I know: it really makes no sense)
+        else
+        {
+            cur_accel = 0;
+
+            float friction_amount = max_forward_speed * friction_percent;
+
+            //decelerate forwards or stop
+            if (forward_speed < 0) {
+
+
+                if (friction_amount > forward_speed * -1) {
+                    forward_speed = 0;
+                }
+                else
+                {
+                    forward_speed += friction_amount;
+                }
+            }
+
+            //decelerate backwards or stop
+            else if (forward_speed > 0) {
+                if (friction_amount > forward_speed) {
+                    forward_speed = 0;
+                }
+                else{
+                    forward_speed -= friction_amount;
+                }
+            }
+
+        }
+
+        //only increase accel if not at maximum
+        if( (cur_accel > 0 && forward_speed < max_forward_speed) || 
+            (cur_accel < 0 && (-1 * forward_speed) < max_forward_speed))
+        {
+            forward_speed += cur_accel * Time.deltaTime;
         }
 
         //can jump in air until we can't anymore
@@ -119,7 +156,8 @@ public class PlayerControlls : MonoBehaviour
 
                 Debug.Log("Booster Ended");
 
-                forward_speed = default_forward_speed;
+                forward_speed = max_forward_speed;
+                cur_max_speed = max_forward_speed;
                 boost_in_effect = false;
                 boost_time_left = 0;
             }
@@ -128,23 +166,33 @@ public class PlayerControlls : MonoBehaviour
 
     }
 
-    //alternate method 1: me no likey
-    /*
+    //move depending on our speed
     void FixedUpdate()
     {
-        float mV = Input.GetAxis("Horizontal");
-        float mH = Input.GetAxis("Vertical");
-        player_rigidBody.velocity = new Vector3(mH * rot_speed, player_rigidBody.velocity.y, mV * -forward_speed);
+        player_rigidBody.MovePosition(transform.position + (transform.forward * forward_speed * Time.deltaTime));
     }
-    */
 
-    // function to handle what happens in boost
-    public void TurnBoostOn(float boost_timer, float speed_boost){
+    //Collision handling
+    void OnCollisionEnter(Collision collision)
+    {
+
+        // reset jump count if we hit ground!
+        if (collision.collider.tag == "Floor")
+        {
+            Debug.Log("Hit ground");
+            jump_count = 0;
+        }
+
+    }
+
+        // function to handle what happens in boost
+        public void TurnBoostOn(float boost_timer, float speed_boost){
         
         //don't stack speed if boost already exists
         if(!boost_in_effect){
             boost_in_effect = true;
             forward_speed += speed_boost;
+            cur_max_speed += speed_boost;
         }
 
         boost_time_left = boost_timer;
