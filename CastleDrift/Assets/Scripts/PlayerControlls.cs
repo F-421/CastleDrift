@@ -19,9 +19,9 @@ public class PlayerControlls : MonoBehaviour
 
     public float jump_velocity; //how much force do we apply when we jump
     public int max_jump; //how many times can we jump
-
     private int jump_count; // how many times we have jumped (allows for double+ jump)
-    private float gravity_multiplier; //makes it fall faster
+    public float default_gravity_multiplier; //makes it fall faster
+    private float gravity_multiplier;
 
     // for boosting
     private float boost_time_left; // how much time left in boost
@@ -49,7 +49,7 @@ public class PlayerControlls : MonoBehaviour
 
         player_rigidBody = GetComponent<Rigidbody>();
         jump_count = 0;
-        gravity_multiplier = 4.5f;
+        gravity_multiplier = default_gravity_multiplier;
 
         cur_accel = 0;
         forward_speed = start_push_speed;
@@ -209,7 +209,7 @@ public class PlayerControlls : MonoBehaviour
         // reset jump count if we hit ground!
         if (collision.collider.tag == "Floor")
         {
-            Debug.Log("Hit ground");
+            //Debug.Log("Hit ground");
             jump_count = 0;
         }
 
@@ -268,5 +268,15 @@ public class PlayerControlls : MonoBehaviour
                 forward_speed -= friction_amount;
             }
         }
+    }
+
+    //adjust our gravity multiplier
+    public void AdjustGravity(float new_multiplier){
+        gravity_multiplier = new_multiplier;
+    }
+
+    //revert gravity multiplier
+    public void RevertGravity(){
+        gravity_multiplier = default_gravity_multiplier;
     }
 }
