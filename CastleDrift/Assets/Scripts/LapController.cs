@@ -30,6 +30,9 @@ public class LapController : MonoBehaviour
                 player.checkpointNum = 0;
                 player.lapNum++;
 
+                //update the respawn
+                player.UpdateRespawn(transform.position);
+
                 //now we need to adjust the lap text
                 lapText.text = player.lapNum + "/" + totalLaps;
                 Debug.Log("Lap " + player.lapNum + "/" + totalLaps);

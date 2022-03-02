@@ -45,6 +45,9 @@ public class PlayerControlls : MonoBehaviour
     Vector3 m_LeftRotate;
     Vector3 m_RightRotate;
 
+    private Vector3 curr_checkpoint; //where does it respawn
+    private float min_y_bound = -50; //how low can it go?
+
     void Start(){
 
         player_rigidBody = GetComponent<Rigidbody>();
@@ -64,11 +67,29 @@ public class PlayerControlls : MonoBehaviour
 
         isDrifting = DriftCode.NO_DRIFT;
         drift_velocity_stored = 0;
+
+        //set respawn at start point
+        curr_checkpoint = player_rigidBody.position;
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        //quit game
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Debug.Log("Quick key pressed");
+            Application.Quit();
+        }
+
+        //respawn if y position too low
+        if (transform.position.y <= min_y_bound)
+        {
+            transform.position = curr_checkpoint;
+        }
+
+
         //move forwards
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         {
@@ -192,8 +213,6 @@ public class PlayerControlls : MonoBehaviour
                 drift_velocity_stored = 0;
             }
         }
-
-
     }
 
     //move depending on our speed
@@ -278,5 +297,11 @@ public class PlayerControlls : MonoBehaviour
     //revert gravity multiplier
     public void RevertGravity(){
         gravity_multiplier = default_gravity_multiplier;
+    }
+
+    //function to update where our respawn is
+    public void UpdateRespawn(Vector3 new_position)
+    {
+        curr_checkpoint = new_position;
     }
 }

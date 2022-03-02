@@ -17,6 +17,9 @@ public class CheckpointController : MonoBehaviour
             // make sure it is the right checkpoint
             if(player.checkpointNum == index - 1){
                 player.checkpointNum = index;
+
+                //update the respawn
+                player.UpdateRespawn(transform.position);
             }
 
         }
