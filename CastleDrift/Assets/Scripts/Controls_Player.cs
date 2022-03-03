@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using UnityEngine.InputSystem;
+using UnityEngine.InputSystem;
 
-public class PlayerControlls : MonoBehaviour
+public class Controls_Player : MonoBehaviour
 {
 
     //for now, we just are working with a set speed, no acceleration
@@ -34,11 +34,15 @@ public class PlayerControlls : MonoBehaviour
     private float drift_time_left; //drift time remaining
     private float drift_velocity_stored; //how much velocity are we storing?
     
+    
     enum DriftCode {NO_DRIFT, STORE_DRIFT, RELEASE_DRIFT};
     private DriftCode isDrifting; //what stage are we 'drifting'
 
     // movify the physics of the rigidbody itself
     Rigidbody player_rigidBody;
+    private float inForward; //movement input vector for going forward
+    private float inTurn; // movement input vector for turning
+    private float TURN_CAP = 0.4f; //how much input to turn
 
     // for lap detection
     public int lapNum;
@@ -72,6 +76,49 @@ public class PlayerControlls : MonoBehaviour
         //set respawn at start point
         curr_checkpoint = player_rigidBody.position;
 
+        inForward = 0;
+        inTurn = 0;
+
+    }
+
+    /*update movement based on input system controller*/
+    private void OnMove(InputValue movementValue){
+        Vector2 movementVector = movementValue.Get<Vector2>();
+
+        // break up our movement into a going forward or turning
+        inForward = movementVector.y;
+        inTurn = movementVector.x;
+        
+        //Debug.Log("Movement registered");
+        //Debug.Log(inForward + ", " + inTurn);
+    }
+
+    /*jump when out jump button is hit*/
+    private void OnJump(){
+        jump_count++;
+
+        // bonus points: each jump is weaker than the last
+        //player_rigidBody.AddForce(Vector3.up * jump_force / (float)(jump_count));
+        //player_rigidBody.AddForce(Vector3.up * jump_force, ForceMode.Impulse);
+
+        player_rigidBody.velocity += Vector3.up * jump_velocity / (float)(jump_count);
+        Debug.Log("Space hit, jumps:" + jump_count + " / " + max_jump);
+    }
+
+    /*drift when drift button is hit and released*/
+    private void OnDrift(){
+
+        //key hold: start storing drift
+        if(inForward > 0 && isDrifting == DriftCode.NO_DRIFT){
+            isDrifting = DriftCode.STORE_DRIFT;
+        }
+
+        //key release: drift
+        else if(isDrifting == DriftCode.STORE_DRIFT){
+            Debug.Log("Let go of drift");
+            ReleaseDrift();
+        }
+
     }
 
     // Update is called once per frame
@@ -92,39 +139,26 @@ public class PlayerControlls : MonoBehaviour
 
 
         //move forwards
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
-        {
+        if(inForward > 0){
             cur_accel = acceleration_max;
-            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+            if (inTurn < 0 && inTurn < -TURN_CAP)
             {
                 transform.Rotate(new Vector3(0.0f, -1.0f, 0.0f) * Time.deltaTime * rot_speed, Space.World);
             }
-            else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+            else if (inTurn > 0 && inTurn > TURN_CAP)
             {
                 transform.Rotate(new Vector3(0.0f, 1.0f, 0.0f) * Time.deltaTime * rot_speed, Space.World);
-            }
-
-            //ony drift when going forward
-            if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift) && isDrifting == DriftCode.NO_DRIFT){
-                isDrifting = DriftCode.STORE_DRIFT;
-            }
-            else if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift)){
-                Debug.Log("Let go of drift");
-                ReleaseDrift();
             }
         }
 
         //move backwards
-        else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
-        {
+        else if(inForward < 0){
             cur_accel = -acceleration_max;
-
-            // turning the car
-            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+            if (inTurn < 0 && inTurn < -TURN_CAP)
             {
                 transform.Rotate(new Vector3(0.0f, -1.0f, 0.0f) * Time.deltaTime * rot_speed, Space.World);
             }
-            else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+            else if (inTurn > 0 && inTurn > TURN_CAP)
             {
                 transform.Rotate(new Vector3(0.0f, 1.0f, 0.0f) * Time.deltaTime * rot_speed, Space.World);
             }
@@ -140,7 +174,7 @@ public class PlayerControlls : MonoBehaviour
 
         //store our velocity and accel
         if(isDrifting == DriftCode.STORE_DRIFT){
-            if(!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.UpArrow)){
+            if(inForward == 0){
                 ReleaseDrift();
             }
             //apply drift
@@ -154,8 +188,8 @@ public class PlayerControlls : MonoBehaviour
                 }
             }
         }
+
         //auto drift if release forward and drifting
-        
 
         //only increase accel if not at maximum
         if( (cur_accel > 0 && forward_speed < max_forward_speed) || 
@@ -164,25 +198,10 @@ public class PlayerControlls : MonoBehaviour
             forward_speed += cur_accel * Time.deltaTime;
         }
 
-        //can jump in air until we can't anymore
-        if(Input.GetKeyDown(KeyCode.Space) && jump_count < max_jump){
-
-            jump_count++;
-
-            // bonus points: each jump is weaker than the last
-            //player_rigidBody.AddForce(Vector3.up * jump_force / (float)(jump_count));
-            //player_rigidBody.AddForce(Vector3.up * jump_force, ForceMode.Impulse);
-
-            player_rigidBody.velocity += Vector3.up * jump_velocity / (float)(jump_count);
-            Debug.Log("Space hit, jumps:" + jump_count + " / " + max_jump);
-        }
-
         //fall faster
         if (player_rigidBody.velocity.y < 0){
             player_rigidBody.velocity += Vector3.up * Physics2D.gravity.y * (gravity_multiplier - 1) * Time.deltaTime;
         }
-
-        //Debug.Log(player_rigidBody.velocity);
 
         // if boost is over, change the velocity back
         if(boost_in_effect){
@@ -215,12 +234,16 @@ public class PlayerControlls : MonoBehaviour
             }
         }
     }
-
+    
     //move depending on our speed
     void FixedUpdate()
     {
+        //move forwards
+        //Vector3 movement = new Vector3(inForward, 0.0f, inTurn);
+        //player_rigidBody.AddForce(movement * cur_max_speed);
         player_rigidBody.MovePosition(transform.position + (transform.forward * forward_speed * Time.deltaTime));
     }
+    
 
     //Collision handling
     void OnCollisionEnter(Collision collision)
@@ -305,4 +328,5 @@ public class PlayerControlls : MonoBehaviour
     {
         curr_checkpoint = new_position;
     }
+    
 }

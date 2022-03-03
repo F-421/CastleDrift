@@ -23,7 +23,7 @@ public class LapController : MonoBehaviour
     // do we increase lap? endgame?
     private void OnTriggerEnter(Collider other) {
         if(other.gameObject.CompareTag(TAG_COMPARE)){
-            PlayerControlls player = other.gameObject.GetComponent<PlayerControlls>();
+            Controls_Player player = other.gameObject.GetComponent<Controls_Player>();
 
             if(player.checkpointNum == checkpoints.Count){
                 

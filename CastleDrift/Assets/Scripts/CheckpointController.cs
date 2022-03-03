@@ -10,7 +10,7 @@ public class CheckpointController : MonoBehaviour
     // increase our collision count when we hit a checkpoint
     private void OnTriggerEnter(Collider other) {
         if(other.gameObject.CompareTag(TAG_COMPARE)){
-            PlayerControlls player = other.gameObject.GetComponent<PlayerControlls>();
+            Controls_Player player = other.gameObject.GetComponent<Controls_Player>();
 
             Debug.Log("Checkpoint #" + index + " hit.");
 
