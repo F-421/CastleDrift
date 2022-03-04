@@ -13,7 +13,7 @@ public class GravityFieldController : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         if(other.gameObject.CompareTag(TAG_COMPARE)){
             Debug.Log("enter field");
-            PlayerControlls player = other.gameObject.GetComponent<PlayerControlls>();
+            Controls_Player player = other.gameObject.GetComponent<Controls_Player>();
             player.AdjustGravity(gravity_multiplier);
         }
     }
@@ -22,7 +22,7 @@ public class GravityFieldController : MonoBehaviour
     private void OnTriggerExit(Collider other) {
         if(other.gameObject.CompareTag(TAG_COMPARE)){
             Debug.Log("exit field");
-            PlayerControlls player = other.gameObject.GetComponent<PlayerControlls>();
+            Controls_Player player = other.gameObject.GetComponent<Controls_Player>();
             player.RevertGravity();
         }
     }

@@ -13,7 +13,7 @@ public class BoosterEffector : MonoBehaviour
         if(other.gameObject.CompareTag(TAG_COMPARE)){
             Debug.Log("Booster hit");
 
-            PlayerControlls player = other.gameObject.GetComponent<PlayerControlls>();
+            Controls_Player player = other.gameObject.GetComponent<Controls_Player>();
 
             player.TurnBoostOn(boost_time, boost_addition);
         }

@@ -55,6 +55,7 @@ public class Controls_Player : MonoBehaviour
     Vector3 m_RightRotate;
 
     private Vector3 curr_checkpoint; //where does it respawn
+    private Quaternion check_point_rot; //what was rotation when entered checkpoint
     private float min_y_bound = -50; //how low can it go?
 
     void Start(){
@@ -79,12 +80,13 @@ public class Controls_Player : MonoBehaviour
 
         //set respawn at start point
         curr_checkpoint = player_rigidBody.position;
+        check_point_rot = player_rigidBody.rotation;
 
         inForward = 0;
         inTurn = 0;
 
         driftParticles.Stop();
-        audio = GetComponent<AudioSource>();
+        audio = driftParticles.GetComponent<AudioSource>();
 
     }
 
@@ -102,14 +104,16 @@ public class Controls_Player : MonoBehaviour
 
     /*jump when out jump button is hit*/
     private void OnJump(){
-        jump_count++;
-
         // bonus points: each jump is weaker than the last
         //player_rigidBody.AddForce(Vector3.up * jump_force / (float)(jump_count));
         //player_rigidBody.AddForce(Vector3.up * jump_force, ForceMode.Impulse);
 
-        player_rigidBody.velocity += Vector3.up * jump_velocity / (float)(jump_count);
-        Debug.Log("Space hit, jumps:" + jump_count + " / " + max_jump);
+        if (jump_count < max_jump)
+        {
+            jump_count++;
+            player_rigidBody.velocity += Vector3.up * jump_velocity / (float)(jump_count);
+            Debug.Log("Space hit, jumps:" + jump_count + " / " + max_jump);
+        }
     }
 
     /*drift when drift button is hit and released*/
@@ -147,6 +151,7 @@ public class Controls_Player : MonoBehaviour
         if (transform.position.y <= min_y_bound)
         {
             transform.position = curr_checkpoint;
+            transform.rotation = check_point_rot;
         }
 
 
@@ -339,16 +344,17 @@ public class Controls_Player : MonoBehaviour
     }
 
     //function to update where our respawn is
-    public void UpdateRespawn(Vector3 new_position)
+    public void UpdateRespawn(Vector3 new_position, Quaternion new_rotation)
     {
         curr_checkpoint = new_position;
+        check_point_rot = player_rigidBody.rotation;
     }
     
     //play particle effect and sound effect for drifting
     public void makeDriftParticles()
     {
         driftParticles.Play();
-        audio.Play();
+        //audio.Play();
     }
 
     public void stopDriftParticles()

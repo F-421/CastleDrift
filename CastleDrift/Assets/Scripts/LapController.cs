@@ -31,7 +31,7 @@ public class LapController : MonoBehaviour
                 player.lapNum++;
 
                 //update the respawn
-                player.UpdateRespawn(transform.position);
+                player.UpdateRespawn(transform.position, transform.rotation);
 
                 //now we need to adjust the lap text
                 lapText.text = player.lapNum + "/" + totalLaps;

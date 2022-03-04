@@ -19,7 +19,7 @@ public class CheckpointController : MonoBehaviour
                 player.checkpointNum = index;
 
                 //update the respawn
-                player.UpdateRespawn(transform.position);
+                player.UpdateRespawn(transform.position, transform.rotation);
             }
 
         }

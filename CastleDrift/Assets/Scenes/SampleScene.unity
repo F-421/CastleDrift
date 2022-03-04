@@ -3409,7 +3409,6 @@ GameObject:
   - component: {fileID: 1760464737}
   - component: {fileID: 1760464736}
   - component: {fileID: 1760464740}
-  - component: {fileID: 1760464741}
   - component: {fileID: 1760464742}
   - component: {fileID: 1760464743}
   m_Layer: 0
@@ -3518,30 +3517,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 1
---- !u!114 &1760464741
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1760464733}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04d6c4ae245af8f4a917de36e45a0c9b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  max_forward_speed: 100
-  rot_speed: 50
-  acceleration_max: 30
-  start_push_speed: 70
-  friction_percent: 0.01
-  jump_velocity: 30
-  max_jump: 2
-  default_gravity_multiplier: 20
-  max_velocity_drift_loss: 50
-  drift_time: 3
-  lapNum: 0
-  checkpointNum: 0
 --- !u!114 &1760464742
 MonoBehaviour:
   m_ObjectHideFlags: 0
