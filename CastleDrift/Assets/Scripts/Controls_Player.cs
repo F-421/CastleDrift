@@ -38,6 +38,10 @@ public class Controls_Player : MonoBehaviour
     enum DriftCode {NO_DRIFT, STORE_DRIFT, RELEASE_DRIFT};
     private DriftCode isDrifting; //what stage are we 'drifting'
 
+    //Particle effect for drifting
+    [SerializeField] ParticleSystem driftParticles = null;
+    private AudioSource audio;
+
     // movify the physics of the rigidbody itself
     Rigidbody player_rigidBody;
     private float inForward; //movement input vector for going forward
@@ -79,6 +83,9 @@ public class Controls_Player : MonoBehaviour
         inForward = 0;
         inTurn = 0;
 
+        driftParticles.Stop();
+        audio = GetComponent<AudioSource>();
+
     }
 
     /*update movement based on input system controller*/
@@ -111,12 +118,17 @@ public class Controls_Player : MonoBehaviour
         //key hold: start storing drift
         if(inForward > 0 && isDrifting == DriftCode.NO_DRIFT){
             isDrifting = DriftCode.STORE_DRIFT;
+
+            //Drifting particle effect code:
+            makeDriftParticles();
         }
 
         //key release: drift
         else if(isDrifting == DriftCode.STORE_DRIFT){
             Debug.Log("Let go of drift");
             ReleaseDrift();
+
+           
         }
 
     }
@@ -231,6 +243,9 @@ public class Controls_Player : MonoBehaviour
                 drift_time_left = 0;
                 isDrifting = DriftCode.NO_DRIFT;
                 drift_velocity_stored = 0;
+
+                stopDriftParticles();
+
             }
         }
     }
@@ -329,4 +344,15 @@ public class Controls_Player : MonoBehaviour
         curr_checkpoint = new_position;
     }
     
+    //play particle effect and sound effect for drifting
+    public void makeDriftParticles()
+    {
+        driftParticles.Play();
+        audio.Play();
+    }
+
+    public void stopDriftParticles()
+    {
+        driftParticles.Stop();
+    }
 }
