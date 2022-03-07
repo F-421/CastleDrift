@@ -40,7 +40,7 @@ public class Controls_Player : MonoBehaviour
 
     //Particle effect for drifting
     [SerializeField] ParticleSystem driftParticles = null;
-    private AudioSource audio;
+  
 
     // movify the physics of the rigidbody itself
     Rigidbody player_rigidBody;
@@ -86,7 +86,7 @@ public class Controls_Player : MonoBehaviour
         inTurn = 0;
 
         driftParticles.Stop();
-        audio = driftParticles.GetComponent<AudioSource>();
+       
 
     }
 
@@ -354,7 +354,7 @@ public class Controls_Player : MonoBehaviour
     public void makeDriftParticles()
     {
         driftParticles.Play();
-        //audio.Play();
+        FindObjectOfType<AudioManager>().Play("Drifting");
     }
 
     public void stopDriftParticles()
