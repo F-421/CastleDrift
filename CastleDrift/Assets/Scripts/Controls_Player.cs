@@ -157,6 +157,10 @@ public class Controls_Player : MonoBehaviour
 
         //move forwards
         if(inForward > 0){
+
+            //Im gonna put the driving sound effect here but this might not be the best spot for it
+            FindObjectOfType<AudioManager>().Play("Driving");
+
             cur_accel = acceleration_max;
             if (inTurn < 0 && inTurn < -TURN_CAP)
             {
@@ -355,6 +359,7 @@ public class Controls_Player : MonoBehaviour
     {
         driftParticles.Play();
         FindObjectOfType<AudioManager>().Play("Drifting");
+        FindObjectOfType<AudioManager>().Play("DriftSparks");
     }
 
     public void stopDriftParticles()
