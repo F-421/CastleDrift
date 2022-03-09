@@ -54,6 +54,9 @@ public class Controls_Player : MonoBehaviour
     Vector3 m_LeftRotate;
     Vector3 m_RightRotate;
 
+    //Wings for flying
+    private GameObject Wings;
+
     private Vector3 curr_checkpoint; //where does it respawn
     private Quaternion check_point_rot; //what was rotation when entered checkpoint
     private float min_y_bound = -50; //how low can it go?
@@ -71,6 +74,7 @@ public class Controls_Player : MonoBehaviour
         m_LeftRotate = new Vector3(0, rot_speed, 0);
         m_RightRotate = new Vector3(0, -rot_speed, 0);
 
+
         lapNum = 1;
         checkpointNum = 0;
         boost_in_effect = false;
@@ -86,7 +90,11 @@ public class Controls_Player : MonoBehaviour
         inTurn = 0;
 
         driftParticles.Stop();
-       
+
+        //set wings false when player starts the game
+        Wings = GameObject.Find("Wings");
+        Wings.SetActive(false);
+
 
     }
 
@@ -157,9 +165,6 @@ public class Controls_Player : MonoBehaviour
 
         //move forwards
         if(inForward > 0){
-
-            //Im gonna put the driving sound effect here but this might not be the best spot for it
-            FindObjectOfType<AudioManager>().Play("Driving");
 
             cur_accel = acceleration_max;
             if (inTurn < 0 && inTurn < -TURN_CAP)
@@ -340,6 +345,11 @@ public class Controls_Player : MonoBehaviour
     //adjust our gravity multiplier
     public void AdjustGravity(float new_multiplier){
         gravity_multiplier = new_multiplier;
+
+        //is this where the gravity is lowered while the player is in the clouds?
+        //set wings active when player is in clouds
+        Wings = GameObject.Find("Wings");
+        Wings.SetActive(true);
     }
 
     //revert gravity multiplier
