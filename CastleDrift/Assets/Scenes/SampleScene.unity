@@ -2004,17 +2004,17 @@ MonoBehaviour:
   - name: Drifting
     clip: {fileID: 8300000, guid: 42d3410c3785b264e998f7aa61832734, type: 3}
     volume: 0.641
-    pitch: 1.05
+    pitch: 0.61
     source: {fileID: 0}
   - name: DriftSparks
     clip: {fileID: 8300000, guid: f110243468d13bc4da7c094d68a16577, type: 3}
-    volume: 0.641
+    volume: 0.19
     pitch: 1.05
     source: {fileID: 0}
   - name: Driving
     clip: {fileID: 8300000, guid: eb33868315a73ad42854b85389779875, type: 3}
-    volume: 0.641
-    pitch: 1.05
+    volume: 0.391
+    pitch: 0.66
     source: {fileID: 0}
 --- !u!4 &1006340614
 Transform:
