@@ -39,8 +39,9 @@ public class Controls_Player : MonoBehaviour
     private DriftCode isDrifting; //what stage are we 'drifting'
 
     //Particle effect for drifting
-    [SerializeField] ParticleSystem driftParticles = null;
-  
+    [SerializeField] ParticleSystem driftParticlesL = null;
+    [SerializeField] ParticleSystem driftParticlesR = null;
+
 
     // movify the physics of the rigidbody itself
     Rigidbody player_rigidBody;
@@ -89,7 +90,8 @@ public class Controls_Player : MonoBehaviour
         inForward = 0;
         inTurn = 0;
 
-        driftParticles.Stop();
+        driftParticlesL.Stop();
+        driftParticlesR.Stop();
 
         //set wings false when player starts the game
         Wings = GameObject.Find("Wings");
@@ -373,14 +375,16 @@ public class Controls_Player : MonoBehaviour
     //play particle effect and sound effect for drifting
     public void makeDriftParticles()
     {
-        driftParticles.Play();
+        driftParticlesL.Play();
+        driftParticlesR.Play();
         FindObjectOfType<AudioManager>().Play("Drifting");
 
     }
 
     public void stopDriftParticles()
     {
-        driftParticles.Stop();
+        driftParticlesL.Stop();
+        driftParticlesR.Stop();
         FindObjectOfType<AudioManager>().Play("DriftSparks");
     }
 }
