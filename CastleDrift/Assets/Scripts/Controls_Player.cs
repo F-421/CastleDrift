@@ -93,7 +93,7 @@ public class Controls_Player : MonoBehaviour
 
         //set wings false when player starts the game
         Wings = GameObject.Find("Wings");
-       // Wings.SetActive(false);
+        Wings.SetActive(false);
 
 
     }
@@ -358,6 +358,9 @@ public class Controls_Player : MonoBehaviour
     //revert gravity multiplier
     public void RevertGravity(){
         gravity_multiplier = default_gravity_multiplier;
+
+        //make wings dissappear when player exits the cloud area
+        Wings.SetActive(false);
     }
 
     //function to update where our respawn is
