@@ -93,13 +93,14 @@ public class Controls_Player : MonoBehaviour
 
         //set wings false when player starts the game
         Wings = GameObject.Find("Wings");
-        Wings.SetActive(false);
+       // Wings.SetActive(false);
 
 
     }
 
     /*update movement based on input system controller*/
     private void OnMove(InputValue movementValue){
+
         Vector2 movementVector = movementValue.Get<Vector2>();
 
         // break up our movement into a going forward or turning
@@ -165,6 +166,10 @@ public class Controls_Player : MonoBehaviour
 
         //move forwards
         if(inForward > 0){
+
+
+            //driving sound effect
+            FindObjectOfType<AudioManager>().Play("Driving");
 
             cur_accel = acceleration_max;
             if (inTurn < 0 && inTurn < -TURN_CAP)
@@ -346,9 +351,7 @@ public class Controls_Player : MonoBehaviour
     public void AdjustGravity(float new_multiplier){
         gravity_multiplier = new_multiplier;
 
-        //is this where the gravity is lowered while the player is in the clouds?
         //set wings active when player is in clouds
-        Wings = GameObject.Find("Wings");
         Wings.SetActive(true);
     }
 
@@ -369,11 +372,12 @@ public class Controls_Player : MonoBehaviour
     {
         driftParticles.Play();
         FindObjectOfType<AudioManager>().Play("Drifting");
-        FindObjectOfType<AudioManager>().Play("DriftSparks");
+
     }
 
     public void stopDriftParticles()
     {
         driftParticles.Stop();
+        FindObjectOfType<AudioManager>().Play("DriftSparks");
     }
 }
