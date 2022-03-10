@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.085871585, g: 0.21163231, b: 0.19592172, a: 1}
+  m_IndirectSpecularColor: {r: 0.08588412, g: 0.21183711, b: 0.19594544, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8739,7 +8739,8 @@ MonoBehaviour:
   default_gravity_multiplier: 20
   max_velocity_drift_loss: 50
   drift_time: 3
-  driftParticles: {fileID: 2092618716}
+  driftParticlesL: {fileID: 2092618716}
+  driftParticlesR: {fileID: 754562839}
   lapNum: 0
   checkpointNum: 0
 --- !u!1 &1784386950
