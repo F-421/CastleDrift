@@ -6819,6 +6819,11 @@ MonoBehaviour:
     volume: 0.641
     pitch: 0.61
     source: {fileID: 0}
+  - name: Drifting2
+    clip: {fileID: 8300000, guid: 867ec29019939df49be15b1e21b7dfc7, type: 3}
+    volume: 0.391
+    pitch: 0.66
+    source: {fileID: 0}
   - name: DriftSparks
     clip: {fileID: 8300000, guid: f110243468d13bc4da7c094d68a16577, type: 3}
     volume: 0.19

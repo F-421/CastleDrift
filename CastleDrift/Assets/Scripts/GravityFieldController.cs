@@ -9,12 +9,26 @@ public class GravityFieldController : MonoBehaviour
     // when in the field, what do we change the gravity to? 
     public float gravity_multiplier;
 
+    //Wings object that appears when player is in the clouds
+    private GameObject Wings;
+
+    private void Start()
+    {
+        //set wings false when player starts the game
+        Wings = GameObject.Find("Wings");
+        Wings.SetActive(false);
+    }
+
+
     // apply gravity
     private void OnTriggerEnter(Collider other) {
         if(other.gameObject.CompareTag(TAG_COMPARE)){
             Debug.Log("enter field");
             Controls_Player player = other.gameObject.GetComponent<Controls_Player>();
             player.AdjustGravity(gravity_multiplier);
+
+            //set wings active when player is in clouds
+            Wings.SetActive(true);
         }
     }
 
@@ -24,6 +38,9 @@ public class GravityFieldController : MonoBehaviour
             Debug.Log("exit field");
             Controls_Player player = other.gameObject.GetComponent<Controls_Player>();
             player.RevertGravity();
+
+            //make wings dissappear when player exits the cloud area
+            Wings.SetActive(false);
         }
     }
 }
