@@ -26,16 +26,16 @@ public class Controls_Player : MonoBehaviour
 
     // for boosting
     private float boost_time_left; // how much time left in boost
-    private bool boost_in_effect; 
+    private bool boost_in_effect;
 
     // for drifting
     public float max_velocity_drift_loss; //how much we slow down (and speed back up bc I'm lazy)
     public float drift_time; //how long we drift at max drift (and other drifts are in relation)
     private float drift_time_left; //drift time remaining
     private float drift_velocity_stored; //how much velocity are we storing?
-    
-    
-    enum DriftCode {NO_DRIFT, STORE_DRIFT, RELEASE_DRIFT};
+
+
+    enum DriftCode { NO_DRIFT, STORE_DRIFT, RELEASE_DRIFT };
     private DriftCode isDrifting; //what stage are we 'drifting'
 
     //Particle effect for drifting
@@ -61,12 +61,15 @@ public class Controls_Player : MonoBehaviour
     private Vector3 curr_checkpoint; //where does it respawn
     private Quaternion check_point_rot; //what was rotation when entered checkpoint
     private float min_y_bound = -50; //how low can it go?
+    private bool paused; //stop the car!!! 
 
-    void Start(){
+    void Start()
+    {
 
         player_rigidBody = GetComponent<Rigidbody>();
         jump_count = 0;
         gravity_multiplier = default_gravity_multiplier;
+        paused = false; 
 
         cur_accel = 0;
         forward_speed = start_push_speed;
@@ -101,25 +104,27 @@ public class Controls_Player : MonoBehaviour
     }
 
     /*update movement based on input system controller*/
-    private void OnMove(InputValue movementValue){
+    private void OnMove(InputValue movementValue)
+    {
 
         Vector2 movementVector = movementValue.Get<Vector2>();
 
         // break up our movement into a going forward or turning
         inForward = movementVector.y;
         inTurn = movementVector.x;
-        
+
         //Debug.Log("Movement registered");
         //Debug.Log(inForward + ", " + inTurn);
     }
 
     /*jump when out jump button is hit*/
-    private void OnJump(){
+    private void OnJump()
+    {
         // bonus points: each jump is weaker than the last
         //player_rigidBody.AddForce(Vector3.up * jump_force / (float)(jump_count));
         //player_rigidBody.AddForce(Vector3.up * jump_force, ForceMode.Impulse);
 
-        if (jump_count < max_jump)
+        if (jump_count < max_jump && !paused)
         {
             jump_count++;
             player_rigidBody.velocity += Vector3.up * jump_velocity / (float)(jump_count);
@@ -128,10 +133,12 @@ public class Controls_Player : MonoBehaviour
     }
 
     /*drift when drift button is hit and released*/
-    private void OnDrift(){
+    private void OnDrift()
+    {
 
         //key hold: start storing drift
-        if(inForward > 0 && isDrifting == DriftCode.NO_DRIFT){
+        if (inForward > 0 && isDrifting == DriftCode.NO_DRIFT)
+        {
             isDrifting = DriftCode.STORE_DRIFT;
 
             //Drifting particle effect code:
@@ -139,11 +146,12 @@ public class Controls_Player : MonoBehaviour
         }
 
         //key release: drift
-        else if(isDrifting == DriftCode.STORE_DRIFT){
+        else if (isDrifting == DriftCode.STORE_DRIFT)
+        {
             Debug.Log("Let go of drift");
             ReleaseDrift();
 
-           
+
         }
 
     }
@@ -158,6 +166,11 @@ public class Controls_Player : MonoBehaviour
             Application.Quit();
         }
 
+        if (paused)
+        {
+            return;
+        }
+
         //respawn if y position too low
         if (transform.position.y <= min_y_bound)
         {
@@ -167,7 +180,8 @@ public class Controls_Player : MonoBehaviour
 
 
         //move forwards
-        if(inForward > 0){
+        if (inForward > 0)
+        {
 
 
             //driving sound effect
@@ -185,7 +199,8 @@ public class Controls_Player : MonoBehaviour
         }
 
         //move backwards
-        else if(inForward < 0){
+        else if (inForward < 0)
+        {
             cur_accel = -acceleration_max;
             if (inTurn < 0 && inTurn < -TURN_CAP)
             {
@@ -206,17 +221,22 @@ public class Controls_Player : MonoBehaviour
         }
 
         //store our velocity and accel
-        if(isDrifting == DriftCode.STORE_DRIFT){
-            if(inForward == 0){
+        if (isDrifting == DriftCode.STORE_DRIFT)
+        {
+            if (inForward == 0)
+            {
                 ReleaseDrift();
             }
             //apply drift
-            else{
+            else
+            {
                 cur_accel = 0;
-                if(forward_speed > max_forward_speed - max_velocity_drift_loss){
+                if (forward_speed > max_forward_speed - max_velocity_drift_loss)
+                {
                     FakeFriction();
                 }
-                if(drift_velocity_stored < max_forward_speed){
+                if (drift_velocity_stored < max_forward_speed)
+                {
                     drift_velocity_stored += max_forward_speed * friction_percent;
                 }
             }
@@ -225,22 +245,25 @@ public class Controls_Player : MonoBehaviour
         //auto drift if release forward and drifting
 
         //only increase accel if not at maximum
-        if( (cur_accel > 0 && forward_speed < max_forward_speed) || 
+        if ((cur_accel > 0 && forward_speed < max_forward_speed) ||
             (cur_accel < 0 && (-1 * forward_speed) < max_forward_speed))
         {
             forward_speed += cur_accel * Time.deltaTime;
         }
 
         //fall faster
-        if (player_rigidBody.velocity.y < 0){
+        if (player_rigidBody.velocity.y < 0)
+        {
             player_rigidBody.velocity += Vector3.up * Physics2D.gravity.y * (gravity_multiplier - 1) * Time.deltaTime;
         }
 
         // if boost is over, change the velocity back
-        if(boost_in_effect){
+        if (boost_in_effect)
+        {
             boost_time_left -= Time.deltaTime;
 
-            if(boost_time_left <= 0){
+            if (boost_time_left <= 0)
+            {
 
                 Debug.Log("Booster Ended");
 
@@ -252,10 +275,12 @@ public class Controls_Player : MonoBehaviour
         }
 
         // still apply drift until time is up
-        if(isDrifting == DriftCode.RELEASE_DRIFT){
+        if (isDrifting == DriftCode.RELEASE_DRIFT)
+        {
             drift_time_left -= Time.deltaTime;
 
-            if(drift_time_left <= 0){
+            if (drift_time_left <= 0)
+            {
                 Debug.Log("Drift Ended");
 
                 forward_speed = max_forward_speed;
@@ -270,7 +295,7 @@ public class Controls_Player : MonoBehaviour
             }
         }
     }
-    
+
     //move depending on our speed
     void FixedUpdate()
     {
@@ -279,7 +304,7 @@ public class Controls_Player : MonoBehaviour
         //player_rigidBody.AddForce(movement * cur_max_speed);
         player_rigidBody.MovePosition(transform.position + (transform.forward * forward_speed * Time.deltaTime));
     }
-    
+
 
     //Collision handling
     void OnCollisionEnter(Collision collision)
@@ -295,10 +320,12 @@ public class Controls_Player : MonoBehaviour
     }
 
     // function to handle what happens in boost
-    public void TurnBoostOn(float boost_timer, float speed_boost){
-        
+    public void TurnBoostOn(float boost_timer, float speed_boost)
+    {
+
         //don't stack speed if boost already exists
-        if(!boost_in_effect){
+        if (!boost_in_effect)
+        {
             boost_in_effect = true;
             forward_speed += speed_boost;
             cur_max_speed += speed_boost;
@@ -308,7 +335,8 @@ public class Controls_Player : MonoBehaviour
     }
 
     //we drift
-    public void ReleaseDrift(){
+    public void ReleaseDrift()
+    {
         Debug.Log("Release Drift here");
         isDrifting = DriftCode.RELEASE_DRIFT;
 
@@ -322,14 +350,17 @@ public class Controls_Player : MonoBehaviour
 
     // do internal 'friction' calculation
     // yes, I am faking friction in decelerating conditions at the moment
-    private void FakeFriction(){
+    private void FakeFriction()
+    {
         float friction_amount = max_forward_speed * friction_percent;
 
         //decelerate forwards or stop
-        if (forward_speed < 0) {
+        if (forward_speed < 0)
+        {
 
 
-            if (friction_amount > forward_speed * -1) {
+            if (friction_amount > forward_speed * -1)
+            {
                 forward_speed = 0;
             }
             else
@@ -339,18 +370,22 @@ public class Controls_Player : MonoBehaviour
         }
 
         //decelerate backwards or stop
-        else if (forward_speed > 0) {
-            if (friction_amount > forward_speed) {
+        else if (forward_speed > 0)
+        {
+            if (friction_amount > forward_speed)
+            {
                 forward_speed = 0;
             }
-            else{
+            else
+            {
                 forward_speed -= friction_amount;
             }
         }
     }
 
     //adjust our gravity multiplier
-    public void AdjustGravity(float new_multiplier){
+    public void AdjustGravity(float new_multiplier)
+    {
         gravity_multiplier = new_multiplier;
 
         //set wings active when player is in clouds
@@ -358,7 +393,8 @@ public class Controls_Player : MonoBehaviour
     }
 
     //revert gravity multiplier
-    public void RevertGravity(){
+    public void RevertGravity()
+    {
         gravity_multiplier = default_gravity_multiplier;
 
         //make wings dissappear when player exits the cloud area
@@ -371,7 +407,7 @@ public class Controls_Player : MonoBehaviour
         curr_checkpoint = new_position;
         check_point_rot = player_rigidBody.rotation;
     }
-    
+
     //play particle effect and sound effect for drifting
     public void makeDriftParticles()
     {
@@ -386,5 +422,24 @@ public class Controls_Player : MonoBehaviour
         driftParticlesL.Stop();
         driftParticlesR.Stop();
         FindObjectOfType<AudioManager>().Play("DriftSparks");
+    }
+
+
+    /*the car hit something stagger back and wait to gain control*/
+    public void stagger()
+    {
+        forward_speed = 0;
+        StartCoroutine(delay(1));
+
+    }
+
+    /*can't move for x seconds*/
+    IEnumerator delay(float seconds)
+    {
+        paused = true;
+        yield return new WaitForSeconds(seconds);
+        paused = false;
+
+        Debug.Log("You can move now");
     }
 }

@@ -5,7 +5,8 @@ using UnityEngine.AI;
 
 public class ObstaclAI : MonoBehaviour
 {
-    const string TAG_COMPARE = "Waypoint";  
+    const string TAG_COMPARE = "Waypoint";
+    const string DRIVER = "Player";
 
     private NavMeshAgent navAgent; // the obstacle being moved
     [SerializeField] 
@@ -25,7 +26,7 @@ public class ObstaclAI : MonoBehaviour
         }
 
         if(waypoints.Count > 1 && !(waypoints[0] is null)){
-            Debug.Log("Going to" + waypoints[0].position);
+            //Debug.Log("Going to" + waypoints[0].position);
             navAgent.SetDestination(waypoints[0].position);
             target = 0;
         }
@@ -34,15 +35,18 @@ public class ObstaclAI : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other) {
+    private void OnTriggerEnter(Collider other)
+    {
 
         //located other waypoint
-        if(other.gameObject.CompareTag(TAG_COMPARE)){
+        if (other.gameObject.CompareTag(TAG_COMPARE))
+        {
             Debug.Log("Collided with waypoint");
 
             GameObject collidedwaypoint = other.gameObject;
 
-            if((cur_waypoint is not null) && (collidedwaypoint == cur_waypoint)){
+            if ((cur_waypoint is not null) && (collidedwaypoint == cur_waypoint))
+            {
                 return;
             }
 
@@ -50,19 +54,30 @@ public class ObstaclAI : MonoBehaviour
             target++;
 
             //reached end of path: reset targets in other direction
-            if(target == waypoints.Count){
+            if (target == waypoints.Count)
+            {
                 waypoints.Reverse();
                 target = 1;
             }
 
             //go to next waypoint
-            if(!(waypoints[target] is null)){
+            if (!(waypoints[target] is null))
+            {
                 navAgent.SetDestination(waypoints[target].position);
-                Debug.Log("Going to" + waypoints[target].position);
+                //Debug.Log("Going to" + waypoints[target].position);
             }
-            else{
+            else
+            {
                 Debug.Log("Couldn't find waypoint");
             }
+        }
+
+        /*the driver hit the snail. you monster*/
+        else if (other.gameObject.CompareTag(DRIVER))
+        {
+            Debug.Log("You monster. You hit the snail");
+            Controls_Player player = other.gameObject.GetComponent<Controls_Player>();
+            player.stagger();
         }
     }
 }
