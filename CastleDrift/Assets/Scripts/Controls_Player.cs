@@ -55,9 +55,6 @@ public class Controls_Player : MonoBehaviour
     Vector3 m_LeftRotate;
     Vector3 m_RightRotate;
 
-    //Wings for flying
-    private GameObject Wings;
-
     private Vector3 curr_checkpoint; //where does it respawn
     private Quaternion check_point_rot; //what was rotation when entered checkpoint
     private float min_y_bound = -50; //how low can it go?
@@ -95,10 +92,6 @@ public class Controls_Player : MonoBehaviour
 
         driftParticlesL.Stop();
         driftParticlesR.Stop();
-
-        //set wings false when player starts the game
-        Wings = GameObject.Find("Wings");
-        Wings.SetActive(false);
 
 
     }
@@ -387,9 +380,6 @@ public class Controls_Player : MonoBehaviour
     public void AdjustGravity(float new_multiplier)
     {
         gravity_multiplier = new_multiplier;
-
-        //set wings active when player is in clouds
-        Wings.SetActive(true);
     }
 
     //revert gravity multiplier
@@ -397,8 +387,6 @@ public class Controls_Player : MonoBehaviour
     {
         gravity_multiplier = default_gravity_multiplier;
 
-        //make wings dissappear when player exits the cloud area
-        Wings.SetActive(false);
     }
 
     //function to update where our respawn is
