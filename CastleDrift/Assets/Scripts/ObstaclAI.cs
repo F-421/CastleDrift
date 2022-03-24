@@ -41,7 +41,7 @@ public class ObstaclAI : MonoBehaviour
         //located other waypoint
         if (other.gameObject.CompareTag(TAG_COMPARE))
         {
-            Debug.Log("Collided with waypoint");
+            // Debug.Log("Collided with waypoint");
 
             GameObject collidedwaypoint = other.gameObject;
 

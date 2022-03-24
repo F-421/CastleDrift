@@ -24,7 +24,7 @@ public class GameOverScreen : MonoBehaviour
     }
 
     // Update is called once per frame
-    void ResetTrack(){
+    public void ResetTrack(){
         Time.timeScale = 1;
         SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
     }

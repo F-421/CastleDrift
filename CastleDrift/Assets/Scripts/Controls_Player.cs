@@ -97,10 +97,11 @@ public class Controls_Player : MonoBehaviour
     }
 
     /*update movement based on input system controller*/
-    private void OnMove(InputValue movementValue)
+    public void OnMove(InputAction.CallbackContext context)
     {
 
-        Vector2 movementVector = movementValue.Get<Vector2>();
+        Vector2 movementVector = context.ReadValue<Vector2>();
+        // Vector2 movementVector = movementValue.Get<Vector2>();
 
         // break up our movement into a going forward or turning
         inForward = movementVector.y;
@@ -111,13 +112,13 @@ public class Controls_Player : MonoBehaviour
     }
 
     /*jump when out jump button is hit*/
-    private void OnJump()
+    public void OnJump(InputAction.CallbackContext context)
     {
         // bonus points: each jump is weaker than the last
         //player_rigidBody.AddForce(Vector3.up * jump_force / (float)(jump_count));
         //player_rigidBody.AddForce(Vector3.up * jump_force, ForceMode.Impulse);
 
-        if (jump_count < max_jump && !paused)
+        if (context.started && jump_count < max_jump && !paused)
         {
             jump_count++;
             player_rigidBody.velocity += Vector3.up * jump_velocity / (float)(jump_count);
@@ -126,12 +127,13 @@ public class Controls_Player : MonoBehaviour
     }
 
     /*drift when drift button is hit and released*/
-    private void OnDrift()
+    public void OnDrift(InputAction.CallbackContext context)
     {
 
         //key hold: start storing drift
-        if (inForward > 0 && isDrifting == DriftCode.NO_DRIFT)
+        if (context.started && inForward > 0 && isDrifting == DriftCode.NO_DRIFT)
         {
+            Debug.Log("Start Drift");
             isDrifting = DriftCode.STORE_DRIFT;
 
             //Drifting particle effect code:
@@ -139,7 +141,7 @@ public class Controls_Player : MonoBehaviour
         }
 
         //key release: drift
-        else if (isDrifting == DriftCode.STORE_DRIFT)
+        else if (context.canceled && isDrifting == DriftCode.STORE_DRIFT)
         {
             Debug.Log("Let go of drift");
             ReleaseDrift();
@@ -153,7 +155,7 @@ public class Controls_Player : MonoBehaviour
     void Update()
     {
         //quit game
-        if (Input.GetKey(KeyCode.Escape))
+        if (Input.GetKey(KeyCode.KeypadEnter))
         {
             Debug.Log("Quick key pressed");
             Application.Quit();
