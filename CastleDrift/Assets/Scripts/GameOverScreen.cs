@@ -20,7 +20,7 @@ public class GameOverScreen : MonoBehaviour
         quit_button.onClick.AddListener(QuitGame);
 
         //hide this until we completed all laps
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
     }
 
     // Update is called once per frame

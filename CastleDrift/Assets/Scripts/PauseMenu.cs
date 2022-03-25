@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
@@ -36,6 +37,12 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1;
         paused = false;
         pausePanel.SetActive(false);
+    }
+
+    // Update is called once per frame
+    public void ResetTrack(){
+        Time.timeScale = 1;
+        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
     }
 
     //Exit the application (saving later)
