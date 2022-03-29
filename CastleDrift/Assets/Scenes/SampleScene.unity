@@ -2483,6 +2483,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 1
+  fire: {fileID: 4804152550540996890, guid: f0e161a7dc1d3cb4cb5fbefd92fbe934, type: 3}
 --- !u!135 &683197670
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2494,7 +2495,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 3.7
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &691948874
 GameObject:
@@ -2734,6 +2735,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 1
+  fire: {fileID: 4804152550540996890, guid: f0e161a7dc1d3cb4cb5fbefd92fbe934, type: 3}
 --- !u!135 &694612849
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2745,7 +2747,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 3.7
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &697246542
 GameObject:
@@ -3528,6 +3530,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 1
+  fire: {fileID: 4804152550540996890, guid: f0e161a7dc1d3cb4cb5fbefd92fbe934, type: 3}
 --- !u!135 &748072472
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3539,7 +3542,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 3.7
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &748411525 stripped
 GameObject:
@@ -3559,6 +3562,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 1
+  fire: {fileID: 4804152550540996890, guid: f0e161a7dc1d3cb4cb5fbefd92fbe934, type: 3}
 --- !u!135 &748411527
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3570,7 +3574,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 3.7
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &754562836
 GameObject:
@@ -11234,6 +11238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 1
+  fire: {fileID: 4804152550540996890, guid: f0e161a7dc1d3cb4cb5fbefd92fbe934, type: 3}
 --- !u!135 &1233144674
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -11245,7 +11250,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 3.7
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1250469701
 GameObject:
@@ -11716,6 +11721,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 1
+  fire: {fileID: 4804152550540996890, guid: f0e161a7dc1d3cb4cb5fbefd92fbe934, type: 3}
 --- !u!135 &1332305215
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -11727,7 +11733,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 3.7
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1348855799 stripped
 GameObject:
@@ -11752,6 +11758,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 1
+  fire: {fileID: 4804152550540996890, guid: f0e161a7dc1d3cb4cb5fbefd92fbe934, type: 3}
 --- !u!135 &1354170837
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -11763,7 +11770,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 3.7
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1374595834
 PrefabInstance:
@@ -11873,6 +11880,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 1
+  fire: {fileID: 4804152550540996890, guid: f0e161a7dc1d3cb4cb5fbefd92fbe934, type: 3}
 --- !u!135 &1376053055
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -11884,7 +11892,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 3.7
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1377360839
 PrefabInstance:
@@ -11989,6 +11997,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 1
+  fire: {fileID: 4804152550540996890, guid: f0e161a7dc1d3cb4cb5fbefd92fbe934, type: 3}
 --- !u!135 &1377360842
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -12000,7 +12009,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 3.7
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1394424813
 GameObject:
@@ -12199,6 +12208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 1
+  fire: {fileID: 4804152550540996890, guid: f0e161a7dc1d3cb4cb5fbefd92fbe934, type: 3}
 --- !u!135 &1396911858
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -12210,7 +12220,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 3.7
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1397835973
 GameObject:
@@ -12460,6 +12470,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 1
+  fire: {fileID: 4804152550540996890, guid: f0e161a7dc1d3cb4cb5fbefd92fbe934, type: 3}
 --- !u!135 &1404694898
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -12471,7 +12482,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 3.7
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1427154783
 GameObject:
@@ -12659,6 +12670,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 1
+  fire: {fileID: 4804152550540996890, guid: f0e161a7dc1d3cb4cb5fbefd92fbe934, type: 3}
 --- !u!135 &1434281891
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -12670,7 +12682,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 3.7
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1442059253
 GameObject:
@@ -13291,6 +13303,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 1
+  fire: {fileID: 4804152550540996890, guid: f0e161a7dc1d3cb4cb5fbefd92fbe934, type: 3}
 --- !u!135 &1520471650
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -13302,7 +13315,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 3.7
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1540110215
 GameObject:
@@ -13384,6 +13397,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 1
+  fire: {fileID: 4804152550540996890, guid: f0e161a7dc1d3cb4cb5fbefd92fbe934, type: 3}
 --- !u!135 &1543704738
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -13395,7 +13409,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 3.7
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1560024123
 GameObject:
@@ -14259,6 +14273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 1
+  fire: {fileID: 4804152550540996890, guid: f0e161a7dc1d3cb4cb5fbefd92fbe934, type: 3}
 --- !u!135 &1733439754
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -14270,7 +14285,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 3.7
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1744020173 stripped
 GameObject:
@@ -14290,6 +14305,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 1
+  fire: {fileID: 4804152550540996890, guid: f0e161a7dc1d3cb4cb5fbefd92fbe934, type: 3}
 --- !u!135 &1744020175
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -14301,7 +14317,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 3.7
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1750450985
 PrefabInstance:
@@ -14406,6 +14422,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 1
+  fire: {fileID: 4804152550540996890, guid: f0e161a7dc1d3cb4cb5fbefd92fbe934, type: 3}
 --- !u!135 &1750450988
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -14417,7 +14434,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 3.7
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1751925567
 GameObject:
@@ -14558,6 +14575,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 1
+  fire: {fileID: 4804152550540996890, guid: f0e161a7dc1d3cb4cb5fbefd92fbe934, type: 3}
 --- !u!135 &1758928382
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -14569,7 +14587,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 3.7
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1760464733
 GameObject:
@@ -15304,6 +15322,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 1
+  fire: {fileID: 4804152550540996890, guid: f0e161a7dc1d3cb4cb5fbefd92fbe934, type: 3}
 --- !u!135 &1961905441
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -15315,7 +15334,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 3.7
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1966804148
 GameObject:
@@ -15498,6 +15517,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 1
+  fire: {fileID: 4804152550540996890, guid: f0e161a7dc1d3cb4cb5fbefd92fbe934, type: 3}
 --- !u!135 &1983147535
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -15509,7 +15529,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 3.7
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1985236960
 GameObject:
@@ -16192,6 +16212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 1
+  fire: {fileID: 4804152550540996890, guid: f0e161a7dc1d3cb4cb5fbefd92fbe934, type: 3}
 --- !u!135 &2063595244
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -16203,7 +16224,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 3.7
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2064827919
 GameObject:
@@ -43304,63 +43325,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1001 &4804152551688865454
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4804152550540996890, guid: f0e161a7dc1d3cb4cb5fbefd92fbe934, type: 3}
-      propertyPath: m_Name
-      value: LanternFire
-      objectReference: {fileID: 0}
-    - target: {fileID: 4804152550540996891, guid: f0e161a7dc1d3cb4cb5fbefd92fbe934, type: 3}
-      propertyPath: m_RootOrder
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 4804152550540996891, guid: f0e161a7dc1d3cb4cb5fbefd92fbe934, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1768.95
-      objectReference: {fileID: 0}
-    - target: {fileID: 4804152550540996891, guid: f0e161a7dc1d3cb4cb5fbefd92fbe934, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 615.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4804152550540996891, guid: f0e161a7dc1d3cb4cb5fbefd92fbe934, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 1066.9996
-      objectReference: {fileID: 0}
-    - target: {fileID: 4804152550540996891, guid: f0e161a7dc1d3cb4cb5fbefd92fbe934, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4804152550540996891, guid: f0e161a7dc1d3cb4cb5fbefd92fbe934, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4804152550540996891, guid: f0e161a7dc1d3cb4cb5fbefd92fbe934, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4804152550540996891, guid: f0e161a7dc1d3cb4cb5fbefd92fbe934, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.0000000018626451
-      objectReference: {fileID: 0}
-    - target: {fileID: 4804152550540996891, guid: f0e161a7dc1d3cb4cb5fbefd92fbe934, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4804152550540996891, guid: f0e161a7dc1d3cb4cb5fbefd92fbe934, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4804152550540996891, guid: f0e161a7dc1d3cb4cb5fbefd92fbe934, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: f0e161a7dc1d3cb4cb5fbefd92fbe934, type: 3}
 --- !u!33 &4815468030247173556
 MeshFilter:
   m_ObjectHideFlags: 0
