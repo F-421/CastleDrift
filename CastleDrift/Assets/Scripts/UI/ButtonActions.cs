@@ -19,9 +19,6 @@ public class ButtonActions : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
-
-
-    // Update is called once per frame
     public void ResetTrack(){
         Time.timeScale = 1;
         SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
@@ -32,4 +29,28 @@ public class ButtonActions : MonoBehaviour
         Application.Quit();
 
     }
+
+    public void Tutorial()
+    {
+        //loads the tutorial scene
+        //needs correct name for the scene
+        SceneManager.LoadScene("TutorialScene");
+
+    }
+
+    public void Credits()
+    {
+        //loads the Credits scene
+        //needs correct name for the scene
+        SceneManager.LoadScene("CreditsScene");
+
+    }
+
+    public void Back()
+    {
+        //loads the Main Menu (StartMenu) scene
+        //needs correct name for the scene
+        SceneManager.LoadScene("StartMenu");
+    }
+
 }
