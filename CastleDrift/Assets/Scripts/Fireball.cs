@@ -6,6 +6,19 @@ public class Fireball : MonoBehaviour
 {
     const string TAG_PLAYER = "Player"; 
     const string TAG_GROUND = "Floor"; 
+	private float fire_speed = 5;
+	
+	private Rigidbody fire_rb;
+	void Start(){
+		fire_rb = gameObject.GetComponent<Rigidbody>();
+	}
+
+    void Update()
+    {
+        //keep moving down
+		fire_rb.AddForce(Vector3.down * fire_speed, ForceMode.Impulse);
+    }
+
     private void OnTriggerEnter(Collider other) {
 
         //stagger then delete if hit player
