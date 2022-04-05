@@ -50,5 +50,14 @@ public class PauseMenu : MonoBehaviour
         Application.Quit();
 
     }
-    
+
+
+    //Go back to the main menu (From tutorial only)
+    public void Back()
+    {
+        //loads the Main Menu (StartMenu) scene
+        //needs correct name for the scene
+        SceneManager.LoadScene("StartMenu");
+    }
+
 }

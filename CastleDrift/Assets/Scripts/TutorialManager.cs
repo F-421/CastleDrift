@@ -6,6 +6,7 @@ public class TutorialManager : MonoBehaviour
 {
     public GameObject[] popups;
     private int popupIndex;
+    public float waiting = 2f;
 
     //order of popups is:
     //0: moving forward
@@ -38,14 +39,14 @@ public class TutorialManager : MonoBehaviour
         //popup for moving forwards
         if (popupIndex == 0)
         {
-            if(Input.GetKeyDown(KeyCode.UpArrow))
+            if(Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
                 popupIndex++;
         }
 
         //popup for turning
         else if(popupIndex == 1)
         {
-            if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow))
+            if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
                 popupIndex++;
         }
 

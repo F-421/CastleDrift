@@ -28,6 +28,7 @@ public class GravityFieldController : MonoBehaviour
 
             //set wings active when player is in clouds
             Wings.SetActive(true);
+            FindObjectOfType<AudioManager>().Play("Flying");
         }
     }
 
@@ -40,6 +41,7 @@ public class GravityFieldController : MonoBehaviour
 
             //make wings dissappear when player exits the cloud area
             Wings.SetActive(false);
+            FindObjectOfType<AudioManager>().Stop("Flying");
         }
     }
 }
