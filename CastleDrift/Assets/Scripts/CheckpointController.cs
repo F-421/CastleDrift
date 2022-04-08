@@ -5,11 +5,12 @@ using UnityEngine;
 public class CheckpointController : MonoBehaviour
 {
     public int index;
-    const string TAG_COMPARE = "Player"; // avoid retyping if I need this again
+    const string PLAYER_TAG_COMPARE = "Player"; // avoid retyping if I need this again
+	const string AI_TAG_COMPARE = "AIKart"; // avoid retyping if I need this again
 
     // increase our collision count when we hit a checkpoint
     private void OnTriggerEnter(Collider other) {
-        if(other.gameObject.CompareTag(TAG_COMPARE)){
+        if(other.gameObject.CompareTag(PLAYER_TAG_COMPARE) || other.gameObject.CompareTag(AI_TAG_COMPARE)){
             Controls_Player player = other.gameObject.GetComponent<Controls_Player>();
 
             Debug.Log("Checkpoint #" + index + " hit.");

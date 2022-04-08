@@ -104,8 +104,7 @@ public class Controls_Player : MonoBehaviour
         // Vector2 movementVector = movementValue.Get<Vector2>();
 
         // break up our movement into a going forward or turning
-        inForward = movementVector.y;
-        inTurn = movementVector.x;
+		SetMovement(movementVector.y, movementVector.x);
 
         //Debug.Log("Movement registered");
         //Debug.Log(inForward + ", " + inTurn);
@@ -150,6 +149,12 @@ public class Controls_Player : MonoBehaviour
         }
 
     }
+	
+	public void SetMovement(float forwardMovement, float turnDirection){
+	
+		inForward = forwardMovement;
+        inTurn = turnDirection;
+	}
 
     // Update is called once per frame
     void Update()
