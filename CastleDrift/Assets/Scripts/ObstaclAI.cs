@@ -6,7 +6,8 @@ using UnityEngine.AI;
 public class ObstaclAI : MonoBehaviour
 {
     const string TAG_COMPARE = "Waypoint";
-    const string DRIVER = "Player";
+    const string PLAYER_TAG_COMPARE = "Player"; // avoid retyping if I need this again
+	const string AI_TAG_COMPARE = "AIKart"; // avoid retyping if I need this again
 
     private NavMeshAgent navAgent; // the obstacle being moved
     [SerializeField] 
@@ -73,7 +74,7 @@ public class ObstaclAI : MonoBehaviour
         }
 
         /*the driver hit the snail. you monster*/
-        else if (other.gameObject.CompareTag(DRIVER))
+        else if (other.gameObject.CompareTag(PLAYER_TAG_COMPARE) || other.gameObject.CompareTag(AI_TAG_COMPARE))
         {
             Debug.Log("You monster. You hit the snail");
             Controls_Player player = other.gameObject.GetComponent<Controls_Player>();
