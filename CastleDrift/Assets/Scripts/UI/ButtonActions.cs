@@ -53,4 +53,11 @@ public class ButtonActions : MonoBehaviour
         SceneManager.LoadScene("StartMenu");
     }
 
+    public void GhostCar()
+    {
+        //loads the Scene with the ghost car
+        //needs correct name for the scene
+        SceneManager.LoadScene("PracticeGhost");
+    }
+
 }

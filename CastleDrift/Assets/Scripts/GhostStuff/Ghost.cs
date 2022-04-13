@@ -15,7 +15,7 @@ public class Ghost : ScriptableObject
     //these will store the positions for the ghost to replay
     public List<float> timestamp;
     public List<Vector3> positions;
-    public List<Vector3> rotation;
+    public List<Quaternion> rotation;
 
     public void ResetData()
     {

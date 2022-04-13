@@ -58,7 +58,7 @@ public class GhostPlayer : MonoBehaviour
         if(index1 ==index2)
         {
             this.transform.position = ghost.positions[index1];
-            this.transform.eulerAngles = ghost.positions[index1];
+            this.transform.rotation = ghost.rotation[index1];
         }
 
         //need linear interpolation
@@ -68,7 +68,7 @@ public class GhostPlayer : MonoBehaviour
 
             //Vector3.Lerp is a build in linear interpolation function
             this.transform.position = Vector3.Lerp(ghost.positions[index1], ghost.positions[index2], interpolationFactor);
-            this.transform.eulerAngles = Vector3.Lerp(ghost.positions[index1], ghost.positions[index2], interpolationFactor);
+            this.transform.rotation = Quaternion.Slerp(ghost.rotation[index1], ghost.rotation[index2], interpolationFactor);
         }
     }
 

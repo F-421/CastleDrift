@@ -30,7 +30,7 @@ public class GhostRecorder : MonoBehaviour
         {
             ghost.timestamp.Add(timeValue);
             ghost.positions.Add(this.transform.position);
-            ghost.rotation.Add(this.transform.position);
+            ghost.rotation.Add(this.transform.rotation);
 
             timer = 0;
         }
