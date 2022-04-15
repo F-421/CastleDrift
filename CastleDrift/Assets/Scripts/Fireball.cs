@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class Fireball : MonoBehaviour
 {
     const string TAG_PLAYER = "Player"; 
     const string TAG_GROUND = "Floor"; 
-	private float fire_speed = 5;
+	private float fire_speed = 3;
+	[SerializeField] ParticleSystem endFire = null; // fire burst when destroyed
 	
 	private Rigidbody fire_rb;
 	void Start(){
@@ -42,6 +44,16 @@ public class Fireball : MonoBehaviour
     // Destroy object (and any effects that need to be on destroy)
     private void FireEnd()
     {
+		endFire.Play();
+		StartCoroutine(delay(3));
+
+    }
+
+    /*can't move for x seconds*/
+    IEnumerator delay(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
         Destroy(gameObject);
+		GetComponentInChildren<VisualEffect>().Stop();
     }
 }
