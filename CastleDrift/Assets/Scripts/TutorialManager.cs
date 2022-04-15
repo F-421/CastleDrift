@@ -13,8 +13,6 @@ public class TutorialManager : MonoBehaviour
     //1: turning
     //2: Drifting
     //3: Jumping
-    //4: Acceleration boosts
-    //5: Avoiding Obstacles
 
 
 
@@ -22,15 +20,18 @@ public class TutorialManager : MonoBehaviour
     {
         for (int i = 0; i < popups.Length; i++)
         {
+            //waiting = 2f;
             //omly shows the current relevant popup instruction
-            if( i == popupIndex)
+            if (i == popupIndex)
             {
-                popups[i].SetActive(true);
+                    popups[i].SetActive(true);
+
             }
 
             else
             {
-                popups[i].SetActive(false);
+
+                    popups[i].SetActive(false);
             }
         }
 
@@ -39,8 +40,8 @@ public class TutorialManager : MonoBehaviour
         //popup for moving forwards
         if (popupIndex == 0)
         {
-            if(Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
-                popupIndex++;
+           if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
+              popupIndex++;
         }
 
         //popup for turning
