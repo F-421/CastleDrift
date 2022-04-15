@@ -5042,6 +5042,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17a20055216c7d44895bf8bc22d92420, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  forwardInput: 0
   waypoints:
   - {fileID: 0}
 --- !u!114 &2225858031935631879
@@ -10369,6 +10370,26 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: b459a48ebcea2304db682834c8277d5e, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: b459a48ebcea2304db682834c8277d5e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 4645395102331854818, guid: e02138f842e774a4ea8f733c5bef67a2, type: 3}
+    - target: {fileID: -7511558181221131132, guid: b459a48ebcea2304db682834c8277d5e, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2441c79940171dc43b33badf9fe97828, type: 2}
+    - target: {fileID: -7511558181221131132, guid: b459a48ebcea2304db682834c8277d5e, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6a5bd2d6fcc4dce48975c50d153ddc31, type: 2}
+    - target: {fileID: -7511558181221131132, guid: b459a48ebcea2304db682834c8277d5e, type: 3}
+      propertyPath: m_Materials.Array.data[5]
+      value: 
+      objectReference: {fileID: -1976799459468813334, guid: 6be5d3bb81268894390c3ff2186bc7fa, type: 3}
     - target: {fileID: 919132149155446097, guid: b459a48ebcea2304db682834c8277d5e, type: 3}
       propertyPath: m_Name
       value: Car.Placeholder

@@ -27,6 +27,7 @@ public class LapController : MonoBehaviour
         // player car lap
         if(other.gameObject.CompareTag(PLAYER_TAG_COMPARE)){
             Controls_Player player = other.gameObject.GetComponent<Controls_Player>();
+			Debug.Log(player.lapNum);
 
             if(player.checkpointNum == checkpoints.Count){
                 
@@ -55,7 +56,8 @@ public class LapController : MonoBehaviour
         // opponent car lap
         else if(other.gameObject.CompareTag(AI_TAG_COMPARE)){
             Controls_Player player = other.gameObject.GetComponent<Controls_Player>();
-
+			Debug.Log(player.lapNum);
+			
             if(player.checkpointNum == checkpoints.Count){
                 
                 player.checkpointNum = 0;

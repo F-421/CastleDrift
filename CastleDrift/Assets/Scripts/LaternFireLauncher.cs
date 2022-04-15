@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class LaternFireLauncher : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class LaternFireLauncher : MonoBehaviour
     private float cooldown = 2f; // set time until launch another fire
     private float fire_cooldown_left; // cooldown when fire launched
     public GameObject fire; //the fire projectile to launch
-    private float fire_speed = 8000; // how fast is fire?
+    private float fire_speed = 10; // how fast is fire?
     private int num_in_field; // hwo many vehicles passing by
     
     // Start is called before the first frame update
@@ -53,6 +54,8 @@ public class LaternFireLauncher : MonoBehaviour
     private void MakeFire(){
         GameObject lanternFire = (GameObject) Instantiate(fire, transform.position, fire.transform.rotation);
         lanternFire.GetComponent<Rigidbody>().AddForce(fire_speed * Vector3.down, ForceMode.Impulse);
-        fire_cooldown_left = cooldown;
+        lanternFire.GetComponentInChildren<VisualEffect>().Play();
+		//lanternFire.GetComponent<VisualEffect>().Play();
+		fire_cooldown_left = cooldown;
     }
 }
