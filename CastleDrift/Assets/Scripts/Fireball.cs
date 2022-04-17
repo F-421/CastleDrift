@@ -7,7 +7,7 @@ public class Fireball : MonoBehaviour
 {
     const string TAG_PLAYER = "Player"; 
     const string TAG_GROUND = "Floor"; 
-	private float fire_speed = 3;
+	private float fire_speed = 7;
 	[SerializeField] ParticleSystem endFire = null; // fire burst when destroyed
 	
 	private Rigidbody fire_rb;
