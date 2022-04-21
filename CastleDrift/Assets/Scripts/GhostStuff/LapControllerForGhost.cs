@@ -30,6 +30,7 @@ public class LapControllerForGhost : MonoBehaviour
         if (other.gameObject.CompareTag(PLAYER_TAG_COMPARE))
         {
             Controls_Player player = other.gameObject.GetComponent<Controls_Player>();
+            Debug.Log(player.lapNum);
 
             if (player.checkpointNum == checkpoints.Count)
             {
@@ -47,13 +48,11 @@ public class LapControllerForGhost : MonoBehaviour
                 // do we end game?
                 if (player.lapNum > totalLaps)
                 {
-                    Debug.Log("Now the player will race against ghost");
-
+                    Debug.Log("Game End here");
 
                     // show end game screen (and freeze time)
                     Time.timeScale = 0;
                     gameOver.gameObject.SetActive(true);
-          
                     lapText.gameObject.SetActive(false);
                 }
             }
@@ -63,6 +62,7 @@ public class LapControllerForGhost : MonoBehaviour
         else if (other.gameObject.CompareTag(AI_TAG_COMPARE))
         {
             Controls_Player player = other.gameObject.GetComponent<Controls_Player>();
+            Debug.Log(player.lapNum);
 
             if (player.checkpointNum == checkpoints.Count)
             {

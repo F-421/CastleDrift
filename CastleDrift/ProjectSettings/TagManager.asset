@@ -11,6 +11,7 @@ TagManager:
   - Obstacle
   - AIKart
   - AIWaypoint
+  - GhostManagerScript
   layers:
   - Default
   - TransparentFX
