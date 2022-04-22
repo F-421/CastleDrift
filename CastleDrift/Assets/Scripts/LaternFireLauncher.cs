@@ -5,7 +5,9 @@ using UnityEngine.VFX;
 
 public class LaternFireLauncher : MonoBehaviour
 {
-    const string TAG_COMPARE = "Player";  
+    const string PLAYER_TAG_COMPARE = "Player"; // avoid retyping if I need this again
+	const string AI_TAG_COMPARE = "AIKart"; // avoid retyping if I need this again  
+	
     private float cooldown = 5f; // set time until launch another fire
     private float fire_cooldown_left; // cooldown when fire launched
     public GameObject fire; //the fire projectile to launch
@@ -39,14 +41,14 @@ public class LaternFireLauncher : MonoBehaviour
 
     /*launch fire when player gets too close*/
     private void OnTriggerEnter(Collider other) {
-        if(other.gameObject.CompareTag(TAG_COMPARE)){
+        if(other.gameObject.CompareTag(PLAYER_TAG_COMPARE) || other.gameObject.CompareTag(AI_TAG_COMPARE)){
             num_in_field++;
         }
     }
 
     /*launch fire when player gets too close*/
     private void OnTriggerExit(Collider other) {
-        if(other.gameObject.CompareTag(TAG_COMPARE)){
+        if(other.gameObject.CompareTag(PLAYER_TAG_COMPARE) || other.gameObject.CompareTag(AI_TAG_COMPARE)){
             num_in_field--;
         }
     }

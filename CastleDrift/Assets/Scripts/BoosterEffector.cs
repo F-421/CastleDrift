@@ -6,11 +6,12 @@ public class BoosterEffector : MonoBehaviour
 {
     public float boost_addition; //how much velocity do we add when we boost?
     public float boost_time; 
-    const string TAG_COMPARE = "Player";  
+    const string PLAYER_TAG_COMPARE = "Player"; // avoid retyping if I need this again
+	const string AI_TAG_COMPARE = "AIKart"; // avoid retyping if I need this again  
 
     // give the player a speed boost when hit
     private void OnTriggerEnter(Collider other) {
-        if(other.gameObject.CompareTag(TAG_COMPARE)){
+        if(other.gameObject.CompareTag(PLAYER_TAG_COMPARE) || other.gameObject.CompareTag(AI_TAG_COMPARE)){
             Debug.Log("Booster hit");
 
             Controls_Player player = other.gameObject.GetComponent<Controls_Player>();
