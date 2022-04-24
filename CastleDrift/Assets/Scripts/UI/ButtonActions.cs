@@ -11,6 +11,7 @@ This is so I don't have to go on a wild goose chase for another quit button.
 
 public class ButtonActions : MonoBehaviour
 {
+    public Ghost ghost;
     // Loads the road
     public void StartGame()
     {
@@ -57,7 +58,11 @@ public class ButtonActions : MonoBehaviour
     {
         //loads the Scene with the ghost car
         //needs correct name for the scene
+        ghost.isRecord = true;
+        ghost.isReplay = false;
         SceneManager.LoadScene("PracticeGhost");
+      
+
     }
 
 }

@@ -11,6 +11,7 @@ public class GhostRecorder : MonoBehaviour
 
     private void Awake()
     {
+
         //if the player choses the ghost cart option, record the players movements
         if(ghost.isRecord)
         {

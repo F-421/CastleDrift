@@ -19,10 +19,13 @@ public class GhostMenu : MonoBehaviour
     public PlayerInput playerInput; // how we get the player input
     [SerializeField] private GameObject pausePanel; // the pause menu itself
 
+    
+
     // Start is called before the first frame update
-    private void Start()
+    void Start()
     {
-        otherScript = GameObject.FindGameObjectWithTag("GhostManagerScript").GetComponent<GhostManager>();
+        //otherScript = GameObject.Find("GhostManagerObject").GetComponent<GhostManager>();
+       
     }
 
 
@@ -81,7 +84,11 @@ public class GhostMenu : MonoBehaviour
     public void PlayGhost()
     {
         //Replays the ghost that was just recorded
+    
+        otherScript = GameObject.Find("GhostManagerObject").GetComponent<GhostManager>();
         otherScript.PlayAgainstGhost();
+
+   
         UnPause();
     }
 
