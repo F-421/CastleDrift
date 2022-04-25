@@ -10,10 +10,8 @@ public class GhostMenu : MonoBehaviour
     public Ghost ghost;
 
     GhostManager otherScript;
+    public GameObject Replayer;
     
-    //otherScript = 
-
-    //= GameObject.GetComponent<GhostManager>();
 
     private bool paused; //is pause active?
     public PlayerInput playerInput; // how we get the player input
@@ -25,7 +23,9 @@ public class GhostMenu : MonoBehaviour
     void Start()
     {
         //otherScript = GameObject.Find("GhostManagerObject").GetComponent<GhostManager>();
-       
+    
+        
+        
     }
 
 
@@ -84,12 +84,12 @@ public class GhostMenu : MonoBehaviour
     public void PlayGhost()
     {
         //Replays the ghost that was just recorded
-    
         otherScript = GameObject.Find("GhostManagerObject").GetComponent<GhostManager>();
         otherScript.PlayAgainstGhost();
-
-   
+        //Replayer = GameObject.Find("GhostReplayer");
+       // Replayer.SetActive(true);
         UnPause();
+
     }
 
 }

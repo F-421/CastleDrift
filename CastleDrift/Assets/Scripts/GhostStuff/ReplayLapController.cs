@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 
 // this is to controll the game (and so we eventually have a stopping point)
-public class LapControllerForGhost : MonoBehaviour
+public class ReplayLapController : MonoBehaviour
 {
     GhostManager otherScript;
 
@@ -22,7 +22,11 @@ public class LapControllerForGhost : MonoBehaviour
     {
 
         otherScript = GameObject.Find("GhostManagerObject").GetComponent<GhostManager>();
-        otherScript.RecordGhost();
+        otherScript.PlayAgainstGhost();
+
+        gameOver.gameObject.SetActive(false);
+        lapText.gameObject.SetActive(true);
+
 
 
         lapText.text = "1/" + totalLaps;
@@ -38,7 +42,7 @@ public class LapControllerForGhost : MonoBehaviour
             Controls_Player player = other.gameObject.GetComponent<Controls_Player>();
             Debug.Log(player.lapNum);
 
-   
+
 
             if (player.checkpointNum == checkpoints.Count)
             {
@@ -60,7 +64,7 @@ public class LapControllerForGhost : MonoBehaviour
 
                     // show end game screen (and freeze time)
                     Time.timeScale = 0;
-           
+
                     gameOver.gameObject.SetActive(true);
                     lapText.gameObject.SetActive(false);
                 }

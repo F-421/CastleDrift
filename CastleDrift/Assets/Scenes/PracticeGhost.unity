@@ -15981,7 +15981,8 @@ GameObject:
   - component: {fileID: 335185976}
   - component: {fileID: 335185979}
   - component: {fileID: 335185978}
-  - component: {fileID: 335185977}
+  - component: {fileID: 335185981}
+  - component: {fileID: 335185980}
   m_Layer: 5
   m_Name: GameEndPanel
   m_TagString: Untagged
@@ -16013,20 +16014,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 3400, y: 1500}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &335185977
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 335185975}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e33ade0c8b1ca247bc40458ef067d15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  reset_button: {fileID: 724850027}
-  quit_button: {fileID: 271174677}
 --- !u!114 &335185978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16065,6 +16052,38 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 335185975}
   m_CullTransparentMesh: 1
+--- !u!114 &335185980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 335185975}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0b8676dfd8d5744b99d9357ecedbb1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ghost: {fileID: 11400000, guid: 792fc0163442e034c94ab4b6582e53a3, type: 2}
+  Replayer: {fileID: 435474677}
+  playerInput: {fileID: 1624093580}
+  pausePanel: {fileID: 1424728087}
+--- !u!114 &335185981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 335185975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 761428b56562381408cfa1d2df8e5c42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkpoints: []
+  totalLaps: 1
+  gameOver: {fileID: 1424728087}
+  lapText: {fileID: 1888381746}
 --- !u!1001 &338035226
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19961,6 +19980,54 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 434298709}
   m_Mesh: {fileID: 3965995480434556071, guid: 6be5d3bb81268894390c3ff2186bc7fa, type: 3}
+--- !u!1 &435474677
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 435474679}
+  - component: {fileID: 435474678}
+  m_Layer: 0
+  m_Name: GhostReplayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &435474678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 435474677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 761428b56562381408cfa1d2df8e5c42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkpoints: []
+  totalLaps: 1
+  gameOver: {fileID: 335185975}
+  lapText: {fileID: 1888381746}
+--- !u!4 &435474679
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 435474677}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 608.54553, y: 375.85284, z: 589.35645}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &438057210
 GameObject:
   m_ObjectHideFlags: 0
@@ -54090,7 +54157,7 @@ GameObject:
   - component: {fileID: 1424728089}
   - component: {fileID: 1424728092}
   m_Layer: 5
-  m_Name: GhostMenu
+  m_Name: PauseMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -54172,6 +54239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ghost: {fileID: 11400000, guid: 792fc0163442e034c94ab4b6582e53a3, type: 2}
+  Replayer: {fileID: 435474677}
   playerInput: {fileID: 1624093580}
   pausePanel: {fileID: 1424728087}
 --- !u!1 &1431607116 stripped
@@ -68540,7 +68608,6 @@ GameObject:
   - component: {fileID: 1847479798}
   - component: {fileID: 1847479797}
   - component: {fileID: 1847479800}
-  - component: {fileID: 1847479796}
   m_Layer: 0
   m_Name: Start/Finsih line
   m_TagString: Untagged
@@ -68563,25 +68630,6 @@ Transform:
   m_Father: {fileID: 1958400561}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1847479796
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1847479794}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85b8dc8c4fa1e324bbe29cd84d5b1e25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  checkpoints:
-  - {fileID: 1319532774}
-  - {fileID: 1679807551}
-  - {fileID: 813225459}
-  totalLaps: 2
-  gameOver: {fileID: 335185975}
-  lapText: {fileID: 1888381746}
 --- !u!65 &1847479797
 BoxCollider:
   m_ObjectHideFlags: 0
