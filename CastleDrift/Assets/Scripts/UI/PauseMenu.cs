@@ -10,13 +10,13 @@ public class PauseMenu : MonoBehaviour
     private bool paused; //is pause active?
     public PlayerInput playerInput; // how we get the player input
     [SerializeField] private GameObject pausePanel; // the pause menu itself
-    private GameObject Hud;
+    public GameObject Hud;
 
     // Start is called before the first frame update
     private void Start()
     {
-        Hud = GameObject.Find("RacePanel");
-        Hud.SetActive(true);
+        //Hud = GameObject.Find("RacePanel");
+        //Hud.SetActive(true);
     }
 
 
@@ -29,7 +29,7 @@ public class PauseMenu : MonoBehaviour
         if (!paused){
             Time.timeScale = 0;
             paused = true;
-            //Hud.SetActive(false);
+            Hud.gameObject.SetActive(false);
             pausePanel.SetActive(true);
         }
 
@@ -44,7 +44,7 @@ public class PauseMenu : MonoBehaviour
     public void UnPause(){
         Time.timeScale = 1;
         paused = false;
-        Hud.SetActive(true);
+        Hud.gameObject.SetActive(true);
         pausePanel.SetActive(false);
     }
 
@@ -61,7 +61,7 @@ public class PauseMenu : MonoBehaviour
     }
 
 
-    //Go back to the main menu (From tutorial only)
+    //Go back to the main menu 
     public void Back()
     {
         //loads the Main Menu (StartMenu) scene
