@@ -6,6 +6,7 @@ using TMPro;
 
 public class GameOverScreen : MonoBehaviour
 {
+    public GameObject Hud;
 
     //restarts the track when pushed
     [SerializeField] UnityEngine.UI.Button reset_button;
@@ -18,6 +19,7 @@ public class GameOverScreen : MonoBehaviour
     {
         reset_button.onClick.AddListener(ResetTrack);
         quit_button.onClick.AddListener(QuitGame);
+        Hud.gameObject.SetActive(false);
 
         //hide this until we completed all laps
         //gameObject.SetActive(false);
