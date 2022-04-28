@@ -12,13 +12,13 @@ public class GravityFieldController : MonoBehaviour
     public float gravity_multiplier;
 
     //Wings for flying
-    private GameObject Wings;
+    public GameObject Wings;
 
     void Start()
     {
         //set wings false when player starts the game
-        Wings = GameObject.Find("Wings");
-        Wings.SetActive(false);
+        //Wings = GameObject.Find("Wings");
+        Wings.gameObject.SetActive(false);
     }
 
         // apply gravity
@@ -29,7 +29,7 @@ public class GravityFieldController : MonoBehaviour
             player.AdjustGravity(gravity_multiplier);
 
             //set wings active when player is in clouds
-            Wings.SetActive(true);
+            Wings.gameObject.SetActive(true);
             FindObjectOfType<AudioManager>().Play("Flying");
         }
     }
@@ -42,7 +42,7 @@ public class GravityFieldController : MonoBehaviour
             player.RevertGravity();
 
             //make wings dissappear when player exits the cloud area
-            Wings.SetActive(false);
+            Wings.gameObject.SetActive(false);
             FindObjectOfType<AudioManager>().Stop("Flying");
         }
     }
