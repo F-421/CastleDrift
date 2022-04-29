@@ -41,6 +41,7 @@ public class Controls_Player : MonoBehaviour
     //Particle effect for drifting
     [SerializeField] ParticleSystem driftParticlesL = null;
     [SerializeField] ParticleSystem driftParticlesR = null;
+	[SerializeField] ParticleSystem staggerParticle = null;
 
 
     // movify the physics of the rigidbody itself
@@ -92,6 +93,7 @@ public class Controls_Player : MonoBehaviour
 
         driftParticlesL.Stop();
         driftParticlesR.Stop();
+		staggerParticle.Stop();
 
 
     }
@@ -133,10 +135,9 @@ public class Controls_Player : MonoBehaviour
         if (context.started && inForward > 0 && isDrifting == DriftCode.NO_DRIFT)
         {
             Debug.Log("Start Drift");
-            isDrifting = DriftCode.STORE_DRIFT;
-
+			
             //Drifting particle effect code:
-            makeDriftParticles();
+			StartDrift();
         }
 
         //key release: drift
@@ -290,8 +291,6 @@ public class Controls_Player : MonoBehaviour
                 isDrifting = DriftCode.NO_DRIFT;
                 drift_velocity_stored = 0;
 
-                stopDriftParticles();
-
             }
         }
     }
@@ -333,6 +332,14 @@ public class Controls_Player : MonoBehaviour
 
         boost_time_left = boost_timer;
     }
+	
+	/*start drift*/
+	public void StartDrift()
+    {
+		makeDriftParticles();
+			
+		isDrifting = DriftCode.STORE_DRIFT;
+	}
 
     //we drift
     public void ReleaseDrift()
@@ -346,6 +353,8 @@ public class Controls_Player : MonoBehaviour
 
         //drift time based on how much we stored (max is drift_time)
         drift_time_left = (drift_velocity_stored / max_velocity_drift_loss) * drift_time;
+		
+		stopDriftParticles();
     }
 
     // do internal 'friction' calculation
@@ -417,6 +426,7 @@ public class Controls_Player : MonoBehaviour
         driftParticlesL.Stop();
         driftParticlesR.Stop();
         FindObjectOfType<AudioManager>().Play("DriftSparks");
+		FindObjectOfType<AudioManager>().Stop("Drifting");
     }
 
 
@@ -424,6 +434,7 @@ public class Controls_Player : MonoBehaviour
     public void stagger()
     {
         forward_speed = 0;
+		staggerParticle.Play();
         StartCoroutine(delay(1));
 
     }
