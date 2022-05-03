@@ -42,8 +42,6 @@ public class ReplayLapController : MonoBehaviour
             Controls_Player player = other.gameObject.GetComponent<Controls_Player>();
             Debug.Log(player.lapNum);
 
-
-
             if (player.checkpointNum == checkpoints.Count)
             {
 
@@ -64,7 +62,6 @@ public class ReplayLapController : MonoBehaviour
 
                     // show end game screen (and freeze time)
                     Time.timeScale = 0;
-
                     gameOver.gameObject.SetActive(true);
                     lapText.gameObject.SetActive(false);
                 }

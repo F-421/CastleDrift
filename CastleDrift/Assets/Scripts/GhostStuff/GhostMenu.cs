@@ -86,8 +86,8 @@ public class GhostMenu : MonoBehaviour
         //Replays the ghost that was just recorded
         otherScript = GameObject.Find("GhostManagerObject").GetComponent<GhostManager>();
         otherScript.PlayAgainstGhost();
-        //Replayer = GameObject.Find("GhostReplayer");
-       // Replayer.SetActive(true);
+       Replayer.gameObject.SetActive(true);
+        pausePanel.gameObject.SetActive(false);
         UnPause();
 
     }

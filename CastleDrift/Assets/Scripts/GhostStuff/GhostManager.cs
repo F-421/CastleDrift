@@ -6,11 +6,6 @@ public class GhostManager : MonoBehaviour
 {
     public Ghost ghost;
 
-    private void Start()
-    {
-
-    }
-
     public void RecordGhost()
     {
         //if the player choses the ghost cart option, record the players movements

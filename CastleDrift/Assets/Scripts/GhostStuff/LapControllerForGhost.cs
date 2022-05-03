@@ -24,7 +24,6 @@ public class LapControllerForGhost : MonoBehaviour
         otherScript = GameObject.Find("GhostManagerObject").GetComponent<GhostManager>();
         otherScript.RecordGhost();
 
-
         lapText.text = "1/" + totalLaps;
     }
 
@@ -37,8 +36,6 @@ public class LapControllerForGhost : MonoBehaviour
         {
             Controls_Player player = other.gameObject.GetComponent<Controls_Player>();
             Debug.Log(player.lapNum);
-
-   
 
             if (player.checkpointNum == checkpoints.Count)
             {
@@ -60,7 +57,6 @@ public class LapControllerForGhost : MonoBehaviour
 
                     // show end game screen (and freeze time)
                     Time.timeScale = 0;
-           
                     gameOver.gameObject.SetActive(true);
                     lapText.gameObject.SetActive(false);
                 }
