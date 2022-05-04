@@ -43,6 +43,9 @@ public class Controls_Player : MonoBehaviour
     [SerializeField] ParticleSystem driftParticlesR = null;
 	[SerializeField] ParticleSystem staggerParticle = null;
 
+    //Wings for flying
+    public GameObject Wings;
+
 
     // movify the physics of the rigidbody itself
     Rigidbody player_rigidBody;
@@ -94,6 +97,7 @@ public class Controls_Player : MonoBehaviour
         driftParticlesL.Stop();
         driftParticlesR.Stop();
 		staggerParticle.Stop();
+        Wings.gameObject.SetActive(false);
 
 
     }
@@ -396,12 +400,14 @@ public class Controls_Player : MonoBehaviour
     public void AdjustGravity(float new_multiplier)
     {
         gravity_multiplier = new_multiplier;
+        Wings.gameObject.SetActive(true);
     }
 
     //revert gravity multiplier
     public void RevertGravity()
     {
         gravity_multiplier = default_gravity_multiplier;
+        Wings.gameObject.SetActive(false);
 
     }
 
