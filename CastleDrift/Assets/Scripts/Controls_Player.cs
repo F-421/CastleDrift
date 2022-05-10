@@ -401,6 +401,7 @@ public class Controls_Player : MonoBehaviour
     {
         gravity_multiplier = new_multiplier;
         Wings.gameObject.SetActive(true);
+       
     }
 
     //revert gravity multiplier
@@ -408,6 +409,7 @@ public class Controls_Player : MonoBehaviour
     {
         gravity_multiplier = default_gravity_multiplier;
         Wings.gameObject.SetActive(false);
+        
 
     }
 

@@ -24,9 +24,6 @@ public class GravityFieldController : MonoBehaviour
             Debug.Log("enter field");
             Controls_Player player = other.gameObject.GetComponent<Controls_Player>();
             player.AdjustGravity(gravity_multiplier);
-
-            //set wings active when player is in clouds
-            
             FindObjectOfType<AudioManager>().Play("Flying");
         }
     }
@@ -37,8 +34,6 @@ public class GravityFieldController : MonoBehaviour
             Debug.Log("exit field");
             Controls_Player player = other.gameObject.GetComponent<Controls_Player>();
             player.RevertGravity();
-
-            //make wings dissappear when player exits the cloud area
             FindObjectOfType<AudioManager>().Stop("Flying");
         }
     }
