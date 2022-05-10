@@ -9,6 +9,7 @@ public class PlaceCalc : MonoBehaviour
 {
 	public GameObject player_car;
 	[SerializeField] private List<GameObject> cpu_cars;
+	public int place;
 	
 	[SerializeField] TextMeshProUGUI placeText;
 	
@@ -22,6 +23,7 @@ public class PlaceCalc : MonoBehaviour
     void Update()
     {
         placeText.text = "#" + (CalcPlace() + 1);
+		place = CalcPlace();
     }
 	
 	public int CalcPlace(){
