@@ -45,6 +45,8 @@ public class Controls_Player : MonoBehaviour
 
     //Wings for flying
     public GameObject Wings;
+    public float SteerAngle = 20;
+    private Vector3 MoveForce;
 
 
     // movify the physics of the rigidbody itself
@@ -203,15 +205,16 @@ public class Controls_Player : MonoBehaviour
             }
         }
 
-        //move backwards
+        //move backwards and flip turning directions
         else if (inForward < 0)
         {
             cur_accel = -acceleration_max;
-            if (inTurn < 0 && inTurn < -TURN_CAP)
+            if (inTurn > 0 && inTurn > TURN_CAP)
             {
+                //inTurn > 0 && inTurn > TURN_CAP
                 transform.Rotate(new Vector3(0.0f, -1.0f, 0.0f) * Time.deltaTime * rot_speed, Space.World);
             }
-            else if (inTurn > 0 && inTurn > TURN_CAP)
+            else if (inTurn < 0 && inTurn < -TURN_CAP)
             {
                 transform.Rotate(new Vector3(0.0f, 1.0f, 0.0f) * Time.deltaTime * rot_speed, Space.World);
             }
@@ -221,8 +224,19 @@ public class Controls_Player : MonoBehaviour
         // apply 'friction' here (I know: it really makes no sense)
         else
         {
+            //player_rigidBody.velocity.y > 0
             cur_accel = 0;
             FakeFriction();
+            Debug.Log("player_rigidBody.velocity.y");
+
+            if (inTurn < 0 && inTurn < -TURN_CAP && player_rigidBody.velocity.y != 0)
+            {
+                transform.Rotate(new Vector3(0.0f, -1.0f, 0.0f) * Time.deltaTime * rot_speed, Space.World);
+            }
+            else if (inTurn > 0 && inTurn > TURN_CAP && player_rigidBody.velocity.y != 0)
+            {
+                transform.Rotate(new Vector3(0.0f, 1.0f, 0.0f) * Time.deltaTime * rot_speed, Space.World);
+            }
         }
 
         //store our velocity and accel
@@ -367,11 +381,15 @@ public class Controls_Player : MonoBehaviour
     {
         float friction_amount = max_forward_speed * friction_percent;
 
+        
+        MoveForce += transform.forward * forward_speed * Input.GetAxis("Vertical") * Time.deltaTime;
+        float steerInput = Input.GetAxis("Horizontal");
+        transform.Rotate((Vector3.up * steerInput * MoveForce.magnitude * SteerAngle * Time.deltaTime)/40);
+        //player_rigidBody.MovePosition(transform.position + (transform.forward * forward_speed * SteerAngle * Time.deltaTime));
+
         //decelerate forwards or stop
         if (forward_speed < 0)
         {
-
-
             if (friction_amount > forward_speed * -1)
             {
                 forward_speed = 0;

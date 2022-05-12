@@ -876,7 +876,7 @@ MonoBehaviour:
   max_forward_speed: 100
   rot_speed: 50
   acceleration_max: 60
-  start_push_speed: 70
+  start_push_speed: 0
   friction_percent: 0.01
   jump_velocity: 30
   max_jump: 2
@@ -2541,7 +2541,7 @@ MonoBehaviour:
   m_FollowOffset: {x: 0, y: 5, z: -19}
   m_XDamping: 1
   m_YDamping: 0
-  m_ZDamping: 0.3
+  m_ZDamping: 0.1
   m_AngularDampingMode: 0
   m_PitchDamping: 0
   m_YawDamping: 1.2
