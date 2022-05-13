@@ -44,7 +44,8 @@ public class Controls_Player : MonoBehaviour
 	[SerializeField] ParticleSystem staggerParticle = null;
 
     //Wings for flying
-    public GameObject Wings;
+    public GameObject Wing1;
+    public GameObject Wing2;
     public float SteerAngle = 20;
     private Vector3 MoveForce;
 
@@ -99,7 +100,8 @@ public class Controls_Player : MonoBehaviour
         driftParticlesL.Stop();
         driftParticlesR.Stop();
 		staggerParticle.Stop();
-        Wings.gameObject.SetActive(false);
+        Wing1.gameObject.SetActive(false);
+        Wing2.gameObject.SetActive(false);
 
 
     }
@@ -279,7 +281,7 @@ public class Controls_Player : MonoBehaviour
         // if boost is over, change the velocity back
         if (boost_in_effect)
         {
-            boost_time_left -= Time.deltaTime;
+            //boost_time_left -= Time.deltaTime;
 
             if (boost_time_left <= 0)
             {
@@ -296,7 +298,7 @@ public class Controls_Player : MonoBehaviour
         // still apply drift until time is up
         if (isDrifting == DriftCode.RELEASE_DRIFT)
         {
-            //drift_time_left -= Time.deltaTime;
+            drift_time_left -= Time.deltaTime;
 
             if (drift_time_left <= 0)
             {
@@ -383,8 +385,8 @@ public class Controls_Player : MonoBehaviour
 
         MoveForce += transform.forward * forward_speed * Input.GetAxis("Vertical") * Time.deltaTime;
         float steerInput = Input.GetAxis("Horizontal");
-        transform.Rotate((Vector3.up * steerInput * MoveForce.magnitude * SteerAngle * Time.deltaTime)/40);
-        forward_speed -= friction_amount;
+        transform.Rotate((Vector3.up * steerInput * MoveForce.magnitude * SteerAngle * Time.deltaTime)/70);
+        //forward_speed += friction_amount;
 
         //decelerate forwards or stop
         
@@ -419,16 +421,18 @@ public class Controls_Player : MonoBehaviour
     public void AdjustGravity(float new_multiplier)
     {
         gravity_multiplier = new_multiplier;
-        Wings.gameObject.SetActive(true);
-       
+        Wing1.gameObject.SetActive(true);
+        Wing2.gameObject.SetActive(true);
+
     }
 
     //revert gravity multiplier
     public void RevertGravity()
     {
         gravity_multiplier = default_gravity_multiplier;
-        Wings.gameObject.SetActive(false);
-        
+        Wing1.gameObject.SetActive(false);
+        Wing2.gameObject.SetActive(false);
+
 
     }
 

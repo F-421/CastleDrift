@@ -877,7 +877,7 @@ MonoBehaviour:
   rot_speed: 50
   acceleration_max: 60
   start_push_speed: 0
-  friction_percent: 0.008
+  friction_percent: 0.003
   jump_velocity: 30
   max_jump: 2
   default_gravity_multiplier: 20
@@ -886,7 +886,8 @@ MonoBehaviour:
   driftParticlesL: {fileID: 2028297355}
   driftParticlesR: {fileID: 1107693109}
   staggerParticle: {fileID: 1107693109}
-  Wings: {fileID: 895719477}
+  Wing1: {fileID: 1197897525}
+  Wing2: {fileID: 895719477}
   SteerAngle: 20
   lapNum: 0
   checkpointNum: 0
