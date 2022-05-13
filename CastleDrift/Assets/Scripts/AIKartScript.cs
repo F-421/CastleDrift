@@ -83,7 +83,7 @@ public class AIKartScript : MonoBehaviour
 	private void OnTriggerEnter(Collider other) {
 		if (other.gameObject.CompareTag(TAG_COMPARE))
         {
-			//Debug.Log("AI Kart collided with a waypoint");
+			Debug.Log("AI Kart collided with a waypoint " + waypoint_i);
 
 			//is it our current waypoint? 
 			GameObject collidedwaypoint = other.gameObject;
@@ -92,7 +92,7 @@ public class AIKartScript : MonoBehaviour
                 return;
             }
 
-			//Debug.Log("We hit the correct waypoint");
+			Debug.Log("We hit the correct waypoint" + waypoint_i);
 
 			waypoint_i++;
 
