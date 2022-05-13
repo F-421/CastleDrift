@@ -256,7 +256,7 @@ public class Controls_Player : MonoBehaviour
                 }
                 if (drift_velocity_stored < max_forward_speed)
                 {
-                    drift_velocity_stored += max_forward_speed * friction_percent;
+                    //drift_velocity_stored += max_forward_speed * friction_percent;
                 }
             }
         }
@@ -296,7 +296,7 @@ public class Controls_Player : MonoBehaviour
         // still apply drift until time is up
         if (isDrifting == DriftCode.RELEASE_DRIFT)
         {
-            drift_time_left -= Time.deltaTime;
+            //drift_time_left -= Time.deltaTime;
 
             if (drift_time_left <= 0)
             {
@@ -381,13 +381,13 @@ public class Controls_Player : MonoBehaviour
     {
         float friction_amount = max_forward_speed * friction_percent;
 
-        
         MoveForce += transform.forward * forward_speed * Input.GetAxis("Vertical") * Time.deltaTime;
         float steerInput = Input.GetAxis("Horizontal");
         transform.Rotate((Vector3.up * steerInput * MoveForce.magnitude * SteerAngle * Time.deltaTime)/40);
-        //player_rigidBody.MovePosition(transform.position + (transform.forward * forward_speed * SteerAngle * Time.deltaTime));
+        forward_speed -= friction_amount;
 
         //decelerate forwards or stop
+        
         if (forward_speed < 0)
         {
             if (friction_amount > forward_speed * -1)
@@ -399,6 +399,7 @@ public class Controls_Player : MonoBehaviour
                 forward_speed += friction_amount;
             }
         }
+        
 
         //decelerate backwards or stop
         else if (forward_speed > 0)
