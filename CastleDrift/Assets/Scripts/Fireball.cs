@@ -9,6 +9,7 @@ public class Fireball : MonoBehaviour
 	const string AI_TAG_COMPARE = "AIKart"; // avoid retyping if I need this again  
 	
     const string TAG_GROUND = "Floor"; 
+    const string TAG_GROUND2 = "FireStopper"; 
 	private float fire_speed = 7;
 	[SerializeField] ParticleSystem endFire = null; // fire burst when destroyed
 	
@@ -35,7 +36,7 @@ public class Fireball : MonoBehaviour
             FireEnd();
         }
 
-        else if(other.gameObject.CompareTag(TAG_GROUND)){
+        else if(other.gameObject.CompareTag(TAG_GROUND) || other.gameObject.CompareTag(TAG_GROUND2)){
             FireEnd();
         }
 

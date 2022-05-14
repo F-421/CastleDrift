@@ -12,6 +12,7 @@ TagManager:
   - AIKart
   - AIWaypoint
   - GhostManagerScript
+  - FireStopper
   layers:
   - Default
   - TransparentFX
