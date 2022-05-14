@@ -33,7 +33,7 @@ public class LapController : MonoBehaviour
 
         // player car lap
         if(other.gameObject.CompareTag(PLAYER_TAG_COMPARE)){
-            Controls_Player player = other.gameObject.GetComponent<Controls_Player>();
+            Controls_Player player = other.gameObject.GetComponentInParent<Controls_Player>();
 			Debug.Log(player.lapNum);
 
             if(player.checkpointNum == checkpoints.Count){

@@ -20,7 +20,14 @@ public class GravityFieldController : MonoBehaviour
 
         // apply gravity
         private void OnTriggerEnter(Collider other) {
-        if(other.gameObject.CompareTag(PLAYER_TAG_COMPARE) || other.gameObject.CompareTag(AI_TAG_COMPARE)){
+        if(other.gameObject.CompareTag(PLAYER_TAG_COMPARE)){
+            Debug.Log("enter field");
+            Controls_Player player = other.gameObject.GetComponentInParent<Controls_Player>();
+            player.AdjustGravity(gravity_multiplier);
+            FindObjectOfType<AudioManager>().Play("Flying");
+
+        }
+        if(other.gameObject.CompareTag(AI_TAG_COMPARE)){
             Debug.Log("enter field");
             Controls_Player player = other.gameObject.GetComponent<Controls_Player>();
             player.AdjustGravity(gravity_multiplier);
@@ -30,7 +37,14 @@ public class GravityFieldController : MonoBehaviour
 
     //revert gravity
     private void OnTriggerExit(Collider other) {
-        if(other.gameObject.CompareTag(PLAYER_TAG_COMPARE) || other.gameObject.CompareTag(AI_TAG_COMPARE)){
+        if(other.gameObject.CompareTag(PLAYER_TAG_COMPARE)){
+            Debug.Log("exit field");
+            Controls_Player player = other.gameObject.GetComponentInParent<Controls_Player>();
+            player.RevertGravity();
+            FindObjectOfType<AudioManager>().Stop("Flying");
+
+        }
+        if(other.gameObject.CompareTag(AI_TAG_COMPARE)){
             Debug.Log("exit field");
             Controls_Player player = other.gameObject.GetComponent<Controls_Player>();
             player.RevertGravity();

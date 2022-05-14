@@ -11,7 +11,14 @@ public class BoosterEffector : MonoBehaviour
 
     // give the player a speed boost when hit
     private void OnTriggerEnter(Collider other) {
-        if(other.gameObject.CompareTag(PLAYER_TAG_COMPARE) || other.gameObject.CompareTag(AI_TAG_COMPARE)){
+        if(other.gameObject.CompareTag(PLAYER_TAG_COMPARE)){
+            Debug.Log("Booster hit");
+
+            Controls_Player player = other.gameObject.GetComponentInParent<Controls_Player>();
+
+            player.TurnBoostOn(boost_time, boost_addition);
+        }
+        if(other.gameObject.CompareTag(AI_TAG_COMPARE)){
             Debug.Log("Booster hit");
 
             Controls_Player player = other.gameObject.GetComponent<Controls_Player>();

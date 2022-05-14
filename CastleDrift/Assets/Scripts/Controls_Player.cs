@@ -52,6 +52,7 @@ public class Controls_Player : MonoBehaviour
 
     // movify the physics of the rigidbody itself
     Rigidbody player_rigidBody;
+    
     private float inForward; //movement input vector for going forward
     private float inTurn; // movement input vector for turning
     private float TURN_CAP = 0.4f; //how much input to turn
@@ -127,11 +128,9 @@ public class Controls_Player : MonoBehaviour
         //player_rigidBody.AddForce(Vector3.up * jump_force / (float)(jump_count));
         //player_rigidBody.AddForce(Vector3.up * jump_force, ForceMode.Impulse);
 
-        if (context.started && jump_count < max_jump && !paused)
+        if (context.started)
         {
-            jump_count++;
-            player_rigidBody.velocity += Vector3.up * jump_velocity / (float)(jump_count);
-            Debug.Log("Space hit, jumps:" + jump_count + " / " + max_jump);
+            Jump();
         }
     }
 
@@ -164,6 +163,21 @@ public class Controls_Player : MonoBehaviour
 		inForward = forwardMovement;
         inTurn = turnDirection;
 	}
+
+    /*jump when out jump button is hit*/
+    public void Jump()
+    {
+        // bonus points: each jump is weaker than the last
+        //player_rigidBody.AddForce(Vector3.up * jump_force / (float)(jump_count));
+        //player_rigidBody.AddForce(Vector3.up * jump_force, ForceMode.Impulse);
+
+        if (jump_count < max_jump && !paused)
+        {
+            jump_count++;
+            player_rigidBody.velocity += Vector3.up * jump_velocity / (float)(jump_count);
+            Debug.Log("Space hit, jumps:" + jump_count + " / " + max_jump);
+        }
+    }
 
     // Update is called once per frame
     void Update()
@@ -229,7 +243,7 @@ public class Controls_Player : MonoBehaviour
             //player_rigidBody.velocity.y > 0
             cur_accel = 0;
             FakeFriction();
-            Debug.Log("player_rigidBody.velocity.y");
+            //Debug.Log("player_rigidBody.velocity.y");
 
             if (inTurn < 0 && inTurn < -TURN_CAP && player_rigidBody.velocity.y != 0)
             {
@@ -336,6 +350,12 @@ public class Controls_Player : MonoBehaviour
             jump_count = 0;
         }
 
+    }
+
+    /*called when child (wheels) collide with floor*/
+    public void resetJump(){
+        Debug.Log("Reset Jump");
+        jump_count = 0;
     }
 
     // function to handle what happens in boost
