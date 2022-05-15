@@ -194,6 +194,16 @@ public class Controls_Player : MonoBehaviour
             return;
         }
 
+    }
+
+    //move depending on our speed
+    void FixedUpdate()
+    {
+        //move forwards
+        //Vector3 movement = new Vector3(inForward, 0.0f, inTurn);
+        //player_rigidBody.AddForce(movement * cur_max_speed);
+        player_rigidBody.MovePosition(transform.position + (transform.forward * forward_speed * Time.deltaTime));
+   
         //respawn if y position too low
         if (transform.position.y <= min_y_bound)
         {
@@ -327,15 +337,8 @@ public class Controls_Player : MonoBehaviour
 
             }
         }
-    }
 
-    //move depending on our speed
-    void FixedUpdate()
-    {
-        //move forwards
-        //Vector3 movement = new Vector3(inForward, 0.0f, inTurn);
-        //player_rigidBody.AddForce(movement * cur_max_speed);
-        player_rigidBody.MovePosition(transform.position + (transform.forward * forward_speed * Time.deltaTime));
+
     }
 
 
