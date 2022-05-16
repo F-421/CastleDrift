@@ -48,7 +48,6 @@ public class Controls_Player : MonoBehaviour
     public GameObject Wing2;
     public float SteerAngle = 20;
     private Vector3 MoveForce;
-    public bool isPlayer;
 
 
     // movify the physics of the rigidbody itself
@@ -219,10 +218,7 @@ public class Controls_Player : MonoBehaviour
 
 
             //driving sound effect
-            if (isPlayer)
-            {
-                FindObjectOfType<AudioManager>().Play("Driving");
-            }
+            FindObjectOfType<AudioManager>().Play("Driving");
 
             cur_accel = acceleration_max;
             if (inTurn < 0 && inTurn < -TURN_CAP)
@@ -475,11 +471,7 @@ public class Controls_Player : MonoBehaviour
     {
         driftParticlesL.Play();
         driftParticlesR.Play();
-
-        if (isPlayer)
-        {
-            FindObjectOfType<AudioManager>().Play("Drifting");
-        }
+        FindObjectOfType<AudioManager>().Play("Drifting");
 
     }
 
@@ -487,10 +479,7 @@ public class Controls_Player : MonoBehaviour
     {
         driftParticlesL.Stop();
         driftParticlesR.Stop();
-        if (isPlayer)
-        {
-            FindObjectOfType<AudioManager>().Play("DriftSparks");
-        }
+        FindObjectOfType<AudioManager>().Play("DriftSparks");
 		FindObjectOfType<AudioManager>().Stop("Drifting");
     }
 
