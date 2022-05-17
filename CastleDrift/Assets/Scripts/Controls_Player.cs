@@ -48,7 +48,7 @@ public class Controls_Player : MonoBehaviour
     public GameObject Wing2;
     public float SteerAngle = 20;
     private Vector3 MoveForce;
-    bool isPlayer;
+    public bool isPlayer;
 
 
     // movify the physics of the rigidbody itself

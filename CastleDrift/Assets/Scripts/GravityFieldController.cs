@@ -10,7 +10,7 @@ public class GravityFieldController : MonoBehaviour
 
     // when in the field, what do we change the gravity to? 
     public float gravity_multiplier;
-    bool isPlayer;
+    
 
 
     void Start()
@@ -25,20 +25,17 @@ public class GravityFieldController : MonoBehaviour
             Debug.Log("enter field");
             Controls_Player player = other.gameObject.GetComponentInParent<Controls_Player>();
             player.AdjustGravity(gravity_multiplier);
-            if (isPlayer)
-            {
-                FindObjectOfType<AudioManager>().Play("Flying");
-            }
+          
+            FindObjectOfType<AudioManager>().Play("Flying");
+            
 
         }
         if(other.gameObject.CompareTag(AI_TAG_COMPARE)){
             Debug.Log("enter field");
             Controls_Player player = other.gameObject.GetComponent<Controls_Player>();
             player.AdjustGravity(gravity_multiplier);
-            if (isPlayer)
-            {
-                FindObjectOfType<AudioManager>().Play("Flying");
-            }
+           
+            
         }
     }
 
