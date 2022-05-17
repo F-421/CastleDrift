@@ -1,5 +1,5 @@
 {
-    "m_SGVersion": 2,
+    "m_SGVersion": 3,
     "m_Type": "UnityEditor.ShaderGraph.GraphData",
     "m_ObjectId": "e28ce1586e0245b0bc15542a7a49ced9",
     "m_Properties": [
@@ -8,6 +8,12 @@
         }
     ],
     "m_Keywords": [],
+    "m_Dropdowns": [],
+    "m_CategoryData": [
+        {
+            "m_Id": "c816e3466f2141a584a8d7dacb19049a"
+        }
+    ],
     "m_Nodes": [
         {
             "m_Id": "3d0e606f2416469d8d28a99b44c6096a"
@@ -154,10 +160,11 @@
         "serializedMesh": {
             "m_SerializedMesh": "{\"mesh\":{\"instanceID\":0}}",
             "m_Guid": ""
-        }
+        },
+        "preventRotation": false
     },
     "m_Path": "Sub Graphs",
-    "m_ConcretePrecision": 0,
+    "m_GraphPrecision": 0,
     "m_PreviewMode": 2,
     "m_OutputNode": {
         "m_Id": "3d0e606f2416469d8d28a99b44c6096a"
@@ -540,7 +547,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "a22a13baebc7417282bb3e2b7b21e4b6",
     "m_Id": 0,
-    "m_DisplayName": "Distance (1)",
+    "m_DisplayName": "Distance",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -629,10 +636,14 @@
     "m_Guid": {
         "m_GuidSerialized": "3c1adad2-def9-4b2d-8a34-0b6df978350d"
     },
-    "m_Name": "Distance (1)",
+    "m_Name": "Distance",
+    "m_DefaultRefNameVersion": 0,
+    "m_RefNameGeneratedByDisplayName": "",
     "m_DefaultReferenceName": "Vector1_b0a055bffd6a4a4fbac31ea3b1a1b732",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
     "m_Precision": 0,
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
@@ -705,6 +716,18 @@
         "z": 0.0,
         "w": 0.0
     }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.CategoryData",
+    "m_ObjectId": "c816e3466f2141a584a8d7dacb19049a",
+    "m_Name": "",
+    "m_ChildObjectList": [
+        {
+            "m_Id": "b0a055bffd6a4a4fbac31ea3b1a1b732"
+        }
+    ]
 }
 
 {
@@ -829,9 +852,9 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 794.5,
+            "x": 792.0,
             "y": -246.00001525878907,
-            "width": 208.0,
+            "width": 208.00006103515626,
             "height": 278.0
         }
     },
