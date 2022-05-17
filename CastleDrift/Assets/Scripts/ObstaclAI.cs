@@ -74,7 +74,12 @@ public class ObstaclAI : MonoBehaviour
         }
 
         /*the driver hit the snail. you monster*/
-        else if (other.gameObject.CompareTag(PLAYER_TAG_COMPARE) || other.gameObject.CompareTag(AI_TAG_COMPARE))
+        else if(other.gameObject.CompareTag(PLAYER_TAG_COMPARE)){
+            Debug.Log("You monster. You hit the snail");
+            Controls_Player player = other.gameObject.GetComponentInParent<Controls_Player>();
+            player.stagger();
+        }
+        else if (other.gameObject.CompareTag(AI_TAG_COMPARE))
         {
             Debug.Log("You monster. You hit the snail");
             Controls_Player player = other.gameObject.GetComponent<Controls_Player>();
